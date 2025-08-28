@@ -1,0 +1,10 @@
+{
+  "extends": "@ship-nuxt/tsconfig/node.json",
+  "compilerOptions": {
+    "baseUrl": "src",
+    "rootDir": ".",
+    "types": ["node"]
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}
