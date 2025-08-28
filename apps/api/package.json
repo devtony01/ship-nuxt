@@ -5,15 +5,22 @@
   "author": "devtony01",
   "license": "MIT",
   "scripts": {
-    "start": "ts-node src/app.ts"
+    "start": "ts-node src/app.ts",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:push": "drizzle-kit push"
   },
   "dependencies": {
-    "express": "^4.19.2"
+    "dotenv": "16.5.0",
+    "drizzle-orm": "^0.36.4",
+    "express": "^4.19.2",
+    "mysql2": "^3.11.4"
   },
   "devDependencies": {
     "@ship-nuxt/tsconfig": "workspace:*",
     "@types/express": "^4.17.21",
     "@types/node": "catalog:",
+    "drizzle-kit": "^0.28.1",
     "ts-node": "10.9.2",
     "typescript": "catalog:"
   }
