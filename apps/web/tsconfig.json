@@ -1,0 +1,7 @@
+{
+  "extends": "@ship-nuxt/tsconfig/nuxt.json",
+  "compilerOptions": {
+    "rootDir": "."
+  },
+  "include": [".nuxt/**/*.ts", ".nuxt/**/*.d.ts"]
+}

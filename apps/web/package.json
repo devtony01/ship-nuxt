@@ -1,0 +1,20 @@
+{
+  "name": "web",
+  "description": "Nuxt 3 web app",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "devtony01",
+  "scripts": {
+    "dev": "nuxt dev -p 3002",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "nuxt": "^4.0.3"
+  },
+  "devDependencies": {
+    "@ship-nuxt/tsconfig": "workspace:*",
+    "@types/node": "catalog:",
+    "typescript": "catalog:",
+    "vue-tsc": "^2.0.13"
+  }
+}
