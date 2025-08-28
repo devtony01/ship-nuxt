@@ -1,0 +1,17 @@
+{
+  "name": "ship-nuxt",
+  "description": "Vue.js + Express.js + MySQL full-stack application",
+  "keywords": [
+    "vue",
+    "express",
+    "mysql",
+    "full-stack"
+  ],
+  "author": "devtony01",
+  "packageManager": "pnpm@10.14.0",
+  "engines": {
+    "node": ">= 22.13.0",
+    "yarn": "please-use-pnpm",
+    "pnpm": ">= 9.5.0"
+  }
+}
