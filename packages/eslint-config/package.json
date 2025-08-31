@@ -1,0 +1,15 @@
+{
+  "name": "@ship-nuxt/eslint-config",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./node": "./node.js"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "5.0.0",
+    "eslint": "catalog:",
+    "eslint-plugin-no-relative-import-paths": "1.6.1",
+    "eslint-plugin-simple-import-sort": "12.1.1"
+  }
+}

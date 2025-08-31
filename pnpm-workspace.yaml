@@ -4,7 +4,11 @@ packages:
 
 catalog:
   '@types/node': 22.10.10
+  eslint: 9.31.0
+  lint-staged: 15.2.10
+  prettier: 3.3.3
   typescript: 5.8.3
+  zod: 3.23.8
   
 onlyBuiltDependencies:
   - '@parcel/watcher'

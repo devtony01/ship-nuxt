@@ -1,6 +1,9 @@
 {
   "name": "ship-nuxt",
   "description": "Vue.js + Express.js + MySQL full-stack application",
+  "scripts": {
+    "prepare": "husky"
+  },
   "keywords": [
     "vue",
     "express",
@@ -9,6 +12,7 @@
   ],
   "author": "devtony01",
   "devDependencies": {
+    "husky": "9.0.11",
     "turbo": "2.5.4"
   },
   "optionalDependencies": {
