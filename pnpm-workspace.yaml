@@ -1,6 +1,6 @@
 packages:
-  - "apps/*"
-  - "packages/*"
+  - apps/*
+  - packages/*
 
 catalog:
   '@types/node': 22.10.10
@@ -9,7 +9,10 @@ catalog:
   prettier: 3.3.3
   typescript: 5.8.3
   zod: 3.23.8
-  
+
 onlyBuiltDependencies:
   - '@parcel/watcher'
+  - '@tailwindcss/oxide'
   - esbuild
+  - unrs-resolver
+  - vue-demi

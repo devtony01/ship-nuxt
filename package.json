@@ -2,6 +2,13 @@
   "name": "ship-nuxt",
   "description": "Vue.js + Express.js + MySQL full-stack application",
   "scripts": {
+    "infra": "bash ./bin/start.sh mysql redis",
+    "turbo-start": "turbo run development",
+    "start": "bash ./bin/run-all.sh",
+    "test": "turbo run test",
+    "test:api": "pnpm --filter api test",
+    "test:e2e": "pnpm --filter web test:e2e",
+    "test:all": "pnpm test:api && pnpm test:e2e",
     "prepare": "husky"
   },
   "keywords": [

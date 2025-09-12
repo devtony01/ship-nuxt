@@ -4,12 +4,15 @@
   "private": true,
   "type": "module",
   "exports": {
+    "./nuxt": "./nuxt.js",
     "./node": "./node.js"
   },
   "devDependencies": {
     "@antfu/eslint-config": "5.0.0",
+    "@nuxt/eslint-plugin": "^0.7.4",
     "eslint": "catalog:",
     "eslint-plugin-no-relative-import-paths": "1.6.1",
-    "eslint-plugin-simple-import-sort": "12.1.1"
+    "eslint-plugin-simple-import-sort": "12.1.1",
+    "@ship-nuxt/prettier-config": "workspace:*"
   }
 }

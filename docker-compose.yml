@@ -31,6 +31,17 @@ services:
       retries: 10
     restart: unless-stopped
 
+  redis:
+    container_name: ship-nuxt-redis
+    image: redis:8.0.2
+    command: redis-server --appendonly yes
+    hostname: redis
+    networks:
+      - ship-nuxt
+    ports:
+      - 6379:6379
+    restart: unless-stopped
+
 networks:
   ship-nuxt:
     name: ship-nuxt-network

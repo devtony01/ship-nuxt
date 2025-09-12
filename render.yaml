@@ -1,0 +1,77 @@
+services:
+  # API Service
+  - type: web
+    name: ship-nuxt-api
+    runtime: node
+    plan: starter
+    region: oregon
+    buildCommand: pnpm install && pnpm --filter api build
+    startCommand: pnpm --filter api start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: APP_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: ship-nuxt-db
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: ship-nuxt-redis
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: RESEND_API_KEY
+        sync: false
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
+      - key: AWS_ACCESS_KEY_ID
+        sync: false
+      - key: AWS_SECRET_ACCESS_KEY
+        sync: false
+      - key: AWS_REGION
+        value: us-east-1
+      - key: AWS_S3_BUCKET
+        sync: false
+      - key: WEB_URL
+        value: https://ship-nuxt-web.onrender.com
+    healthCheckPath: /health
+
+  # Web Service
+  - type: web
+    name: ship-nuxt-web
+    runtime: node
+    plan: starter
+    region: oregon
+    buildCommand: pnpm install && pnpm --filter web build
+    startCommand: pnpm --filter web preview
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NUXT_APP_ENV
+        value: production
+      - key: NUXT_API_URL
+        value: https://ship-nuxt-api.onrender.com
+      - key: NUXT_WS_URL
+        value: https://ship-nuxt-api.onrender.com
+      - key: NUXT_WEB_URL
+        value: https://ship-nuxt-web.onrender.com
+      - key: MIXPANEL_API_KEY
+        sync: false
+
+databases:
+  - name: ship-nuxt-db
+    databaseName: ship_nuxt
+    user: ship_nuxt_user
+    plan: starter
+    region: oregon
+
+  - name: ship-nuxt-redis
+    type: redis
+    plan: starter
+    region: oregon
+    maxmemoryPolicy: allkeys-lru
