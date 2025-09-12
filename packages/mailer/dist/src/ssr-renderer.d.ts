@@ -1,0 +1,6 @@
+import { Template, TemplateProps } from './template';
+export declare const renderEmailHtml: <T extends Template>({ template, params }: {
+    template: T;
+    params: TemplateProps[T];
+}) => Promise<string>;
+//# sourceMappingURL=ssr-renderer.d.ts.map

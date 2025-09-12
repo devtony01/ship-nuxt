@@ -1,0 +1,18 @@
+FROM node:18-alpine
+
+# Install dependencies for building native modules
+RUN apk add --no-cache python3 make g++
+
+WORKDIR /app
+COPY ["package*.json", "pnpm*.yaml", "/app/"]
+COPY packages/node-sql/package.json /app/packages/node-sql/
+
+# Install pnpm and dependencies
+RUN npm install -g pnpm && pnpm install --no-frozen-lockfile
+
+COPY . .
+
+WORKDIR /app/packages/node-sql
+RUN pnpm run build
+
+CMD ["sh", "-c", "if [ \"$TEST_TYPE\" = \"replication\" ]; then pnpm run test:replication; else pnpm run all; fi"]

@@ -1,0 +1,1 @@
+{"version":3,"file":"ssr-renderer.d.ts","sourceRoot":"","sources":["../../src/ssr-renderer.ts"],"names":[],"mappings":"AAEA,OAAO,EAAE,QAAQ,EAAE,aAAa,EAAE,MAAM,YAAY,CAAA;AAepD,eAAO,MAAM,eAAe,GAAU,CAAC,SAAS,QAAQ,EAAE,sBAGvD;IACD,QAAQ,EAAE,CAAC,CAAA;IACX,MAAM,EAAE,aAAa,CAAC,CAAC,CAAC,CAAA;CACzB,KAAG,OAAO,CAAC,MAAM,CAIjB,CAAA"}

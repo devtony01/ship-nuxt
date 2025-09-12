@@ -1,0 +1,48 @@
+{
+  "name": "@paracelsus/node-sql",
+  "version": "1.0.0",
+  "author": "Ship Nuxt",
+  "description": "Reactive MySQL wrapper with Drizzle ORM for Node.JS",
+  "private": false,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "tests": "./bin/run-tests.sh",
+    "tests:replication": "./bin/run-tests.sh replication",
+    "all": "run-s test:*",
+    "test:eslint": "tsc --noEmit && eslint \"**/*.{js,ts}\" --quiet --fix",
+    "test:mocha": "NODE_ENV=test mocha --exit --timeout 20000 -r ts-node/register src/tests/**/*.spec.ts src/tests/*.spec.ts",
+    "test:replication": "NODE_ENV=test mocha --exit --timeout 60000 -r ts-node/register src/tests/replication.spec.ts",
+    "build": "tsc"
+  },
+  "keywords": [
+    "mysql",
+    "drizzle",
+    "sql",
+    "paracelsus"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "drizzle-orm": "^0.36.4",
+    "lodash": "4.17.21",
+    "mysql2": "^3.11.4"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.3.20",
+    "@types/chai-spies": "^1.0.6",
+    "@types/lodash": "^4.17.13",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "catalog:",
+    "@typescript-eslint/eslint-plugin": "^8.18.1",
+    "@typescript-eslint/parser": "^8.18.1",
+    "chai": "^4.5.0",
+    "chai-spies": "^1.1.0",
+    "eslint": "catalog:",
+    "mocha": "^11.7.1",
+    "npm-run-all": "^4.1.5",
+    "prettier": "catalog:",
+    "ts-node": "^10.9.2",
+    "typescript": "catalog:",
+    "zod": "catalog:"
+  }
+}

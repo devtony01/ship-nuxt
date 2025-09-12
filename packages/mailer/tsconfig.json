@@ -1,0 +1,15 @@
+{
+  "extends": "@ship-nuxt/tsconfig/node.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "rootDir": ".",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "jsx": "preserve",
+    "types": ["node", "vue"]
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "src/**/*.json", "src/vue-shims.d.ts"],
+  "exclude": ["vite.config.ts", "test-*.js", "dist", "node_modules"]
+}

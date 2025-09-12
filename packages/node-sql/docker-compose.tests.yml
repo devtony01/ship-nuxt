@@ -1,0 +1,153 @@
+services:
+  # Basic MySQL for simple tests
+  mysql:
+    container_name: mysql-test
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=testdb
+      - MYSQL_USER=testuser
+      - MYSQL_PASSWORD=testpass
+    networks:
+      - node-sql-tests
+    ports:
+      - 3308:3306
+    command: --default-authentication-plugin=mysql_native_password
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot"]
+      timeout: 30s
+      interval: 10s
+      retries: 20
+      start_period: 60s
+
+  # MySQL Master for replication tests
+  mysql-master:
+    container_name: mysql-master
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=testdb
+      - MYSQL_USER=testuser
+      - MYSQL_PASSWORD=testpass
+    networks:
+      - node-sql-tests
+    ports:
+      - 3309:3306
+    command: >
+      --server-id=1
+      --log-bin=mysql-bin
+      --binlog-format=ROW
+      --gtid-mode=ON
+      --enforce-gtid-consistency=ON
+      --log-slave-updates=ON
+      --default-authentication-plugin=mysql_native_password
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot"]
+      timeout: 30s
+      interval: 10s
+      retries: 20
+      start_period: 60s
+    volumes:
+      - type: volume
+        source: mysql-master-data
+        target: /var/lib/mysql
+      - ./mysql-init:/docker-entrypoint-initdb.d
+    profiles: ["replication"]
+
+  # MySQL Slave for replication tests
+  mysql-slave:
+    container_name: mysql-slave
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=testdb
+      - MYSQL_USER=testuser
+      - MYSQL_PASSWORD=testpass
+    networks:
+      - node-sql-tests
+    ports:
+      - 3310:3306
+    command: >
+      --server-id=2
+      --relay-log=mysql-relay-bin
+      --log-bin=mysql-bin
+      --binlog-format=ROW
+      --gtid-mode=ON
+      --enforce-gtid-consistency=ON
+      --log-slave-updates=ON
+      --read-only=1
+      --default-authentication-plugin=mysql_native_password
+    depends_on:
+      mysql-master:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot"]
+      timeout: 30s
+      interval: 10s
+      retries: 20
+      start_period: 60s
+    volumes:
+      - type: volume
+        source: mysql-slave-data
+        target: /var/lib/mysql
+      - ./mysql-init:/docker-entrypoint-initdb.d
+    profiles: ["replication"]
+
+  # Replication setup
+  mysql-replicator:
+    container_name: mysql-replicator
+    build: ./mysql-replicator
+    environment:
+      - MASTER_HOST=mysql-master
+      - MASTER_PORT=3306
+      - SLAVE_HOST=mysql-slave
+      - SLAVE_PORT=3306
+      - MYSQL_ROOT_PASSWORD=root
+    networks:
+      - node-sql-tests
+    depends_on:
+      mysql-master:
+        condition: service_healthy
+      mysql-slave:
+        condition: service_healthy
+    profiles: ["replication"]
+
+  # Test container for basic tests
+  tests:
+    container_name: node-sql-tests
+    build:
+      context: ../../
+      dockerfile: ./packages/node-sql/Dockerfile.tests
+    environment:
+      - MYSQL_URL=mysql://testuser:testpass@mysql-test:3306/testdb
+    networks:
+      - node-sql-tests
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  # Test container for replication tests
+  tests-replication:
+    container_name: node-sql-replication-tests
+    build:
+      context: ../../
+      dockerfile: ./packages/node-sql/Dockerfile.tests
+    environment:
+      - TEST_TYPE=replication
+      - MYSQL_URL=mysql://testuser:testpass@mysql-master:3306/testdb
+      - MYSQL_MASTER_URL=mysql://testuser:testpass@mysql-master:3306/testdb
+      - MYSQL_SLAVE_URL=mysql://testuser:testpass@mysql-slave:3306/testdb
+    networks:
+      - node-sql-tests
+    depends_on:
+      mysql-replicator:
+        condition: service_completed_successfully
+    profiles: ["replication"]
+
+networks:
+  node-sql-tests:
+    name: node-sql-tests-network
+
+volumes:
+  mysql-master-data:
+  mysql-slave-data:

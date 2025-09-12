@@ -1,0 +1,52 @@
+{
+  "author": "devtony01",
+  "dependencies": {
+    "@vue-email/components": "^0.0.15",
+    "@vue-email/render": "^0.0.9",
+    "@vue/server-renderer": "3.5.20",
+    "vue": "^3.5.18"
+  },
+  "description": "Ship Nuxt Mailer based on Vue Email",
+  "devDependencies": {
+    "@ship-nuxt/eslint-config": "workspace:*",
+    "@ship-nuxt/prettier-config": "workspace:*",
+    "@ship-nuxt/tsconfig": "workspace:*",
+    "@types/node": "catalog:",
+    "@vitejs/plugin-vue": "6.0.1",
+    "@vue-email/cli": "^0.0.14",
+    "eslint": "catalog:",
+    "lint-staged": "catalog:",
+    "nodemon": "^3.0.2",
+    "prettier": "catalog:",
+    "typescript": "catalog:",
+    "vite": "7.1.3"
+  },
+  "license": "MIT",
+  "lint-staged": {
+    "*.{json,md}": [
+      "prettier --write"
+    ],
+    "*.{ts,vue}": [
+      "eslint --fix",
+      "bash -c 'tsc --noEmit'",
+      "prettier --write"
+    ]
+  },
+  "main": "./dist/index.cjs",
+  "types": "./dist/index.d.ts",
+  "name": "@ship-nuxt/mailer",
+  "scripts": {
+    "build": "npx vite build && mv dist/index.js dist/index.cjs && tsc --emitDeclarationOnly --outDir dist && echo \"export * from './src/template';\nexport * from './src/utils';\nexport * from './src/ssr-renderer';\" > dist/index.d.ts",
+    "dev": "nodemon --watch emails --ext vue --exec \"vue-email export --pretty\"",
+    "eslint": "eslint . --fix",
+    "export": "vue-email export",
+    "precommit": "lint-staged",
+    "prettier": "prettier . --write --config .prettierrc.json",
+    "test": "npm run build && node test-mailer.js",
+    "test:simple": "npm run build && node test-templates.js",
+    "test:templates": "npm run build && node -e \"require('./src/test-renderer').testEmailRendering()\"",
+    "tsc": "tsc --noEmit --watch"
+  },
+
+  "version": "0.0.0"
+}
