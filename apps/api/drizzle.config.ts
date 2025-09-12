@@ -1,10 +1,14 @@
 import { defineConfig } from 'drizzle-kit';
+import { dirname, join } from 'node:path';
 import { env } from 'node:process';
 
 import 'dotenv/config';
 
+// Resolve the entities package path
+const entities = dirname(require.resolve('@ship-nuxt/entities/package.json'));
+
 export default defineConfig({
-  schema: './src/db/schema/*',
+  schema: [join(entities, 'src/schemas/*.ts')],
   out: './drizzle',
   dialect: 'mysql',
   dbCredentials: {
