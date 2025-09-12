@@ -8,12 +8,22 @@ import configUtil from 'utils/config.util';
  * This way you can ensure the app isn't built with invalid env vars.
  */
 const schema = z.object({
-  APP_ENV: z.enum(['development', 'staging', 'production']).default('development'),
+  APP_ENV: z.enum(['development', 'staging', 'production', 'test']).default('development'),
   IS_DEV: z.preprocess(() => process.env.APP_ENV === 'development', z.boolean()),
   PORT: z.coerce.number().optional().default(3001),
   API_URL: z.string(),
   WEB_URL: z.string(),
   DATABASE_URL: z.string(),
+  REDIS_URI: z.string().optional(),
+  REDIS_ERRORS_POLICY: z.string().optional().default('throw'),
+  MIXPANEL_API_KEY: z.string().optional(),
+  RESEND_API_KEY: z.string().optional(),
+  GOOGLE_CLIENT_ID: z.string().optional(),
+  GOOGLE_CLIENT_SECRET: z.string().optional(),
+  CLOUD_STORAGE_ENDPOINT: z.string().optional(),
+  CLOUD_STORAGE_ACCESS_KEY_ID: z.string().optional(),
+  CLOUD_STORAGE_SECRET_ACCESS_KEY: z.string().optional(),
+  CLOUD_STORAGE_BUCKET: z.string().optional(),
 });
 
 type Config = z.infer<typeof schema>;

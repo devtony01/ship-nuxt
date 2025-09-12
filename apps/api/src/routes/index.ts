@@ -1,24 +1,18 @@
+import cookieParser from 'cookie-parser';
 import { Express } from 'express';
+
+import { AppRequest, AppResponse } from 'types';
 
 import adminRoutes from './admin.routes';
 import privateRoutes from './private.routes';
 import publicRoutes from './public.routes';
 
 export default (app: Express) => {
-  app.get('/api/health', async (req, res) => {
-    try {
-      res.json({
-        status: 'healthy',
-        database: 'connected',
-        timestamp: new Date().toISOString(),
-      });
-    } catch (error) {
-      res.status(500).json({
-        status: 'unhealthy',
-        database: 'disconnected',
-        error: error instanceof Error ? error.message : 'Unknown error',
-      });
-    }
+  // Add cookie parser middleware
+  app.use(cookieParser());
+
+  app.get('/health', (req: AppRequest, res: AppResponse) => {
+    res.json({ status: 'OK' });
   });
 
   // Mount API routes
