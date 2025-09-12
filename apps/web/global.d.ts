@@ -1,0 +1,1 @@
+declare module '@ship-nuxt/eslint-config/nuxt';

@@ -1,20 +1,71 @@
 {
   "name": "web",
-  "description": "Nuxt 3 web app",
   "version": "1.0.0",
-  "license": "MIT",
+  "description": "Nuxt 3 web app",
   "author": "devtony01",
+  "license": "MIT",
   "scripts": {
+    "build": "nuxt build",
     "dev": "nuxt dev -p 3002",
-    "postinstall": "nuxt prepare"
+    "generate": "nuxt generate",
+    "preview": "nuxt preview -p 3002",
+    "postinstall": "nuxt prepare",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:headed": "playwright test --headed",
+    "test:e2e:debug": "playwright test --debug",
+    "tsc": "vue-tsc --noEmit --watch",
+    "prettier": "prettier . --write",
+    "eslint": "eslint . --fix",
+    "precommit": "lint-staged"
   },
   "dependencies": {
-    "nuxt": "^4.0.3"
+    "@ship-nuxt/app-constants": "workspace:*",
+    "@ship-nuxt/app-types": "workspace:*",
+    "@ship-nuxt/schemas": "workspace:*",
+    "@tanstack/vue-query": "^5.62.7",
+    "@tanstack/vue-table": "^8.20.5",
+    "@vee-validate/zod": "^4.15.0",
+    "axios": "^1.7.7",
+    "daisyui": "5.0.50",
+    "mixpanel-browser": "^2.55.1",
+    "nuxt": "^4.0.3",
+    "socket.io-client": "^4.8.1",
+    "tailwindcss": "4.1.12",
+    "vee-validate": "4.15.1",
+    "vue": "^3.5.18",
+    "vue-router": "^4.5.1",
+    "vue-sonner": "2.0.8",
+    "zod": "catalog:"
   },
   "devDependencies": {
+    "@nuxt/devtools": "latest",
+    "@nuxt/eslint": "^1.7.1",
+    "@playwright/test": "1.55.0",
+    "@ship-nuxt/eslint-config": "workspace:*",
+    "@ship-nuxt/prettier-config": "workspace:*",
     "@ship-nuxt/tsconfig": "workspace:*",
+    "@tailwindcss/vite": "4.1.13",
     "@types/node": "catalog:",
+    "eslint": "catalog:",
+    "lint-staged": "catalog:",
+    "playwright": "1.55.0",
+    "prettier": "catalog:",
     "typescript": "catalog:",
-    "vue-tsc": "^2.0.13"
+    "vite-plugin-node-polyfills": "0.24.0",
+    "vue-tsc": "^2.1.16"
+  },
+  "lint-staged": {
+    "*.{json,md}": [
+      "prettier --write"
+    ],
+    "*.{ts,tsx,vue}": [
+      "eslint --fix",
+      "bash -c 'vue-tsc --noEmit'",
+      "prettier --write"
+    ],
+    "*.css": [
+      "prettier --write"
+    ]
   }
 }
