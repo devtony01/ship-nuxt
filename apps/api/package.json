@@ -60,7 +60,9 @@
     "tldts": "7.0.8",
     "vue": "^3.5.18",
     "winston": "3.17.0",
-    "zod": "catalog:"
+    "zod": "catalog:",
+    "ts-node": "10.9.2",
+    "typescript": "catalog:"
   },
   "devDependencies": {
     "@ship-nuxt/eslint-config": "workspace:*",
@@ -83,9 +85,7 @@
     "prettier": "catalog:",
     "supertest": "^7.1.4",
     "ts-jest": "29.1.2",
-    "ts-node": "10.9.2",
-    "ts-node-dev": "2.0.0",
-    "typescript": "catalog:"
+    "ts-node-dev": "2.0.0"
   },
   "lint-staged": {
     "*.ts": [
