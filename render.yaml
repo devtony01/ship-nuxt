@@ -17,8 +17,7 @@ services:
           name: ship-nuxt-db
           property: connectionString
       - key: REDIS_URL
-        fromService:
-          type: redis
+        fromDatabase:
           name: ship-nuxt-redis
           property: connectionString
       - key: JWT_SECRET
@@ -63,15 +62,19 @@ services:
       - key: MIXPANEL_API_KEY
         sync: false
 
+  # Redis/Key Value Service
+  - type: keyvalue
+    name: ship-nuxt-redis
+    plan: starter
+    region: oregon
+    maxmemoryPolicy: allkeys-lru
+    ipAllowList:
+      - source: 0.0.0.0/0
+        description: everywhere
+
 databases:
   - name: ship-nuxt-db
     databaseName: ship_nuxt
     user: ship_nuxt_user
     plan: starter
     region: oregon
-
-  - name: ship-nuxt-redis
-    type: redis
-    plan: starter
-    region: oregon
-    maxmemoryPolicy: allkeys-lru
