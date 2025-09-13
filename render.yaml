@@ -17,7 +17,8 @@ services:
           name: ship-nuxt-db
           property: connectionString
       - key: REDIS_URL
-        fromDatabase:
+        fromService:
+          type: keyvalue
           name: ship-nuxt-redis
           property: connectionString
       - key: JWT_SECRET
