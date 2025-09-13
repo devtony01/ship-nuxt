@@ -17,9 +17,11 @@ services:
           name: ship-nuxt-db
           property: connectionString
       - key: REDIS_URL
-        fromDatabase:
-          name: ship-nuxt-redis
-          property: connectionString
+        sync: false
+      - key: UPSTASH_REDIS_REST_URL
+        sync: false
+      - key: UPSTASH_REDIS_REST_TOKEN
+        sync: false
       - key: JWT_SECRET
         generateValue: true
       - key: RESEND_API_KEY
@@ -61,16 +63,15 @@ services:
         value: https://ship-nuxt-web.onrender.com
       - key: MIXPANEL_API_KEY
         sync: false
+      - key: REDIS_URL
+        sync: false
+      - key: UPSTASH_REDIS_REST_URL
+        sync: false
+      - key: UPSTASH_REDIS_REST_TOKEN
+        sync: false
 
-  # Redis/Key Value Service
-  - type: keyvalue
-    name: ship-nuxt-redis
-    plan: starter
-    region: oregon
-    maxmemoryPolicy: allkeys-lru
-    ipAllowList:
-      - source: 0.0.0.0/0
-        description: everywhere
+  # Note: Using external Upstash Redis instead of Render's paid Key Value service
+  # REDIS_URL will be provided as environment variable during deployment
 
 databases:
   - name: ship-nuxt-db
