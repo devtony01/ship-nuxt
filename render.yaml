@@ -3,7 +3,7 @@ services:
   - type: web
     name: ship-nuxt-api
     runtime: node
-    plan: starter
+    plan: free
     region: oregon
     buildCommand: pnpm install && pnpm --filter api build
     startCommand: pnpm --filter api db:migrate && pnpm --filter api start
@@ -17,11 +17,9 @@ services:
           name: ship-nuxt-db
           property: connectionString
       - key: REDIS_URL
-        sync: false
-      - key: UPSTASH_REDIS_REST_URL
-        sync: false
-      - key: UPSTASH_REDIS_REST_TOKEN
-        sync: false
+        fromDatabase:
+          name: ship-nuxt-redis
+          property: connectionString
       - key: JWT_SECRET
         generateValue: true
       - key: RESEND_API_KEY
@@ -42,40 +40,20 @@ services:
         value: https://ship-nuxt-web.onrender.com
     healthCheckPath: /health
 
-  # Web Service
-  - type: web
-    name: ship-nuxt-web
-    runtime: node
-    plan: starter
-    region: oregon
-    buildCommand: pnpm install && pnpm --filter web build
-    startCommand: pnpm --filter web preview
-    envVars:
-      - key: NODE_ENV
-        value: production
-      - key: NUXT_APP_ENV
-        value: production
-      - key: NUXT_API_URL
-        value: https://ship-nuxt-api.onrender.com
-      - key: NUXT_WS_URL
-        value: https://ship-nuxt-api.onrender.com
-      - key: NUXT_WEB_URL
-        value: https://ship-nuxt-web.onrender.com
-      - key: MIXPANEL_API_KEY
-        sync: false
-      - key: REDIS_URL
-        sync: false
-      - key: UPSTASH_REDIS_REST_URL
-        sync: false
-      - key: UPSTASH_REDIS_REST_TOKEN
-        sync: false
+  # Web service will be deployed on Vercel instead of Render
 
-  # Note: Using external Upstash Redis instead of Render's paid Key Value service
-  # REDIS_URL will be provided as environment variable during deployment
+  # Redis/Key Value Service (Free Tier)
+  - type: keyvalue
+    name: ship-nuxt-redis
+    plan: free
+    region: oregon
+    ipAllowList:
+      - source: 0.0.0.0/0
+        description: everywhere
 
 databases:
   - name: ship-nuxt-db
     databaseName: ship_nuxt
     user: ship_nuxt_user
-    plan: starter
+    plan: free
     region: oregon
