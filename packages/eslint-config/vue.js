@@ -2,13 +2,13 @@ import antfu from '@antfu/eslint-config';
 import noRelativeImportPaths from 'eslint-plugin-no-relative-import-paths';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
 
-export const getNuxtConfig = (antfuOptions) =>
+export const getVueConfig = (antfuOptions) =>
   antfu(
     {
       lessOpinionated: true,
       stylistic: false,
       vue: true,
-      nuxt: true,
+      typescript: true,
       ...antfuOptions,
     },
     {
@@ -47,8 +47,8 @@ export const getNuxtConfig = (antfuOptions) =>
           'error',
           {
             groups: [
-              // Vue and Nuxt imports
-              ['^vue', '^@vue', '^nuxt', '^@nuxt', '^#'],
+              // Vue imports
+              ['^vue', '^@vue', '^@vitejs'],
               // Third-party libraries and frameworks
               ['^@?\\w'],
               // Internal packages
@@ -97,11 +97,11 @@ export const getNuxtConfig = (antfuOptions) =>
       },
     },
     {
-      files: ['**/types.ts'],
+      files: ['**/types.ts', '**/types/index.ts'],
       rules: {
         'no-restricted-imports': 'off', // disable rule for reexporting types from 'app-types'
       },
     },
 );
 
-export default getNuxtConfig();
+export default getVueConfig();

@@ -5,17 +5,15 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**", ".nuxt/**", ".output/**", "!.nuxt/cache/**"]
     },
-     "api#schedule-dev": {
-      "cache": false
-    },
-    "dev": {
-      "cache": false
-    },
-    "development": {
-      "dependsOn": ["api#schedule-dev", "dev"],
+    "api#schedule-dev": {
       "cache": false,
       "persistent": true
     },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+
     "precommit": {
       "outputs": []
     },

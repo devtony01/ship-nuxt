@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "exports": {
-    "./nuxt": "./nuxt.js",
+    "./vue": "./vue.js",
     "./node": "./node.js"
   },
   "devDependencies": {

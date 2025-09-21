@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "display": "Nuxt",
+  "display": "Vue",
   "extends": "./base.json",
   "compilerOptions": {
     "target": "ES2022",
@@ -9,9 +9,11 @@
     "allowJs": true,
     "strict": true,
     "isolatedModules": true,
-    "types": ["node"],
+    "types": ["node", "vite/client"],
     "composite": true,
     "jsx": "preserve",
-    "lib": ["DOM", "DOM.Iterable", "ES2022"]
+    "lib": ["DOM", "DOM.Iterable", "ES2022"],
+    "allowImportingTsExtensions": true,
+    "noEmit": true
   }
 }

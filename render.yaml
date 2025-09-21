@@ -1,60 +1,23 @@
-services:
-  # API Service
-  - type: web
-    name: ship-nuxt-api
-    runtime: node
-    plan: free
-    region: oregon
-    buildCommand: pnpm install && pnpm --filter api build
-    startCommand: pnpm --filter api db:migrate && pnpm --filter api start
-    envVars:
-      - key: NODE_ENV
-        value: production
-      - key: APP_ENV
-        value: production
-      - key: DATABASE_URL
-        fromDatabase:
-          name: ship-nuxt-db
-          property: connectionString
-      - key: REDIS_URL
-        fromService:
-          type: keyvalue
-          name: ship-nuxt-redis
-          property: connectionString
-      - key: JWT_SECRET
-        generateValue: true
-      - key: RESEND_API_KEY
-        sync: false
-      - key: GOOGLE_CLIENT_ID
-        sync: false
-      - key: GOOGLE_CLIENT_SECRET
-        sync: false
-      - key: AWS_ACCESS_KEY_ID
-        sync: false
-      - key: AWS_SECRET_ACCESS_KEY
-        sync: false
-      - key: AWS_REGION
-        value: us-east-1
-      - key: AWS_S3_BUCKET
-        sync: false
-      - key: WEB_URL
-        value: https://ship-nuxt-web.onrender.com
-    healthCheckPath: /health
+# This file is kept for reference but not used
+# All services are deployed on AWS Free Tier
 
-  # Web service will be deployed on Vercel instead of Render
+# Previous Render configuration (now moved to AWS):
+# - Web frontend: Now on EC2 t2.micro
+# - API backend: Now on EC2 t2.micro  
+# - Database: Now on RDS MySQL
+# - Cache: Now on ElastiCache Redis
+# - CDN: Now on CloudFront
+# - Domain: ship-nuxt.dedyn.io via deSEC DNS
 
-  # Redis/Key Value Service (Free Tier)
-  - type: keyvalue
-    name: ship-nuxt-redis
-    plan: free
-    region: oregon
-    ipAllowList:
-      - source: 0.0.0.0/0
-        description: everywhere
+# AWS Free Tier Benefits:
+# - 750 hours EC2 t2.micro (enough for 24/7)
+# - 750 hours RDS t3.micro + 20GB storage
+# - 750 hours ElastiCache t3.micro
+# - 750 hours Application Load Balancer
+# - 5GB S3 storage + 50GB CloudFront transfer
+# - Free SSL certificates via AWS Certificate Manager
 
-databases:
-  - name: ship-nuxt-db
-    databaseName: ship_nuxt
-    user: ship_nuxt_user
-    plan: free
-    region: oregon
+# Total Cost: $0/month for first 12 months
+# Post free tier: ~$64/month
+
+# See deploy/aws-full-deployment.md for complete setup instructions
