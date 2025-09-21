@@ -30,7 +30,6 @@ jobs:
   build-api:
     name: Build & Push API
     runs-on: ubuntu-latest
-    environment: production
     if: ${{ github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && (inputs.service == 'api' || inputs.service == 'both')) }}
     
     steps:
@@ -66,7 +65,6 @@ jobs:
   build-web:
     name: Build & Push Web
     runs-on: ubuntu-latest
-    environment: production
     if: ${{ github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && (inputs.service == 'web' || inputs.service == 'both')) }}
     
     steps:
