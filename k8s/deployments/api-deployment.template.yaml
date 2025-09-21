@@ -23,6 +23,11 @@ spec:
         env:
         - name: RUN_MIGRATIONS
           value: "false"
+        - name: REDIS_URI
+          valueFrom:
+            secretKeyRef:
+              name: api-secrets
+              key: REDIS_URI
         envFrom:
         - secretRef:
             name: api-secrets
