@@ -152,6 +152,7 @@ jobs:
         IMAGE_TAG: ${{ github.sha }}
         ECR_REGISTRY: 306011031365.dkr.ecr.us-east-1.amazonaws.com
         SSL_CERTIFICATE_ARN: ${{ vars.SSL_CERTIFICATE_ARN }}
+        APP_ENV: production
       run: |
         # Create namespace
         kubectl apply -f k8s/deployments/namespace.yaml
