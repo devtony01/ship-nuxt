@@ -10,7 +10,7 @@ import { rateLimitMiddleware, validateMiddleware } from 'middlewares';
 
 import config from 'config';
 
-import { AppMiddleware, AppRequest, AppResponse, TokenType, User } from 'types';
+import { AppMiddleware, AppRequest, AppResponse, TokenType } from 'types';
 
 const schema = z.object({
   token: z.string().min(1, 'Token is required'),

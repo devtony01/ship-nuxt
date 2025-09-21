@@ -23,10 +23,8 @@ class EmailService {
 
   async sendTemplate<T extends Template>({ to, subject, template, params, attachments }: SendTemplateParams<T>) {
     if (!this.resend) {
-      logger.error('[Resend] API key is not provided');
-      logger.debug('[Resend] Email data:');
-      logger.debug({ subject, template, params });
-
+      logger.debug('[Resend] API key is not provided - skipping email');
+      logger.debug('[Resend] Email data:', { to, subject, template });
       return null;
     }
 
@@ -55,7 +53,7 @@ class EmailService {
 export default new EmailService({
   apiKey: config.RESEND_API_KEY,
   from: {
-    email: 'no-reply@ship-nuxt.paracelsus.com',
+    email: 'no-reply@ship-nuxt.dedyn.io',
     name: 'Ship-Nuxt',
   },
 });

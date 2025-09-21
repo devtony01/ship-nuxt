@@ -37,7 +37,7 @@ const handler: AppMiddleware = async (req: AppRequest, res: AppResponse) => {
     firstName,
     lastName,
     passwordHash: hashedPassword,
-    isEmailVerified: false,
+    isEmailVerified: true, // Set to true for now (no email service)
     avatarUrl: null,
     oauth: null,
     lastRequest: null,

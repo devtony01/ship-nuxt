@@ -1,7 +1,7 @@
 import { and, gte, lt, or } from '@paracelsus/node-sql';
-import { like, sql } from 'drizzle-orm';
 import { users } from '@ship-nuxt/entities';
 import { listUsersSchema } from '@ship-nuxt/schemas';
+import { like, sql } from 'drizzle-orm';
 import { Router } from 'express';
 
 import { userService } from 'resources/user';
