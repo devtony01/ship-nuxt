@@ -58,8 +58,8 @@ jobs:
         file: ./apps/api/Dockerfile
         push: true
         tags: |
-          ${{ vars.AWS_ACCESS_KEY_ID }}.dkr.ecr.us-east-1.amazonaws.com/ship-nuxt-api:${{ inputs.image_tag }}
-          ${{ vars.AWS_ACCESS_KEY_ID }}.dkr.ecr.us-east-1.amazonaws.com/ship-nuxt-api:latest
+          306011031365.dkr.ecr.us-east-1.amazonaws.com/ship-nuxt-api:${{ inputs.image_tag }}
+          306011031365.dkr.ecr.us-east-1.amazonaws.com/ship-nuxt-api:latest
         build-args: |
           APP_ENV=production
 
@@ -92,8 +92,8 @@ jobs:
         file: ./apps/web/Dockerfile
         push: true
         tags: |
-          ${{ vars.AWS_ACCESS_KEY_ID }}.dkr.ecr.us-east-1.amazonaws.com/ship-nuxt-web:${{ inputs.image_tag }}
-          ${{ vars.AWS_ACCESS_KEY_ID }}.dkr.ecr.us-east-1.amazonaws.com/ship-nuxt-web:latest
+          306011031365.dkr.ecr.us-east-1.amazonaws.com/ship-nuxt-web:${{ inputs.image_tag }}
+          306011031365.dkr.ecr.us-east-1.amazonaws.com/ship-nuxt-web:latest
         build-args: |
           APP_ENV=production
 
@@ -124,7 +124,7 @@ jobs:
       env:
         NAMESPACE: production
         IMAGE_TAG: ${{ inputs.image_tag }}
-        ECR_REGISTRY: ${{ vars.AWS_ACCESS_KEY_ID }}.dkr.ecr.us-east-1.amazonaws.com
+        ECR_REGISTRY: 306011031365.dkr.ecr.us-east-1.amazonaws.com
         SSL_CERTIFICATE_ARN: ${{ vars.SSL_CERTIFICATE_ARN }}
       run: |
         # Create namespace
@@ -163,7 +163,7 @@ jobs:
       env:
         NAMESPACE: production
         IMAGE_TAG: ${{ inputs.image_tag }}
-        ECR_REGISTRY: ${{ vars.AWS_ACCESS_KEY_ID }}.dkr.ecr.us-east-1.amazonaws.com
+        ECR_REGISTRY: 306011031365.dkr.ecr.us-east-1.amazonaws.com
         SSL_CERTIFICATE_ARN: ${{ vars.SSL_CERTIFICATE_ARN }}
         API_URL: https://api.ship-nuxt.dedyn.io
         WS_URL: https://api.ship-nuxt.dedyn.io

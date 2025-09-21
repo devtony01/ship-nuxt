@@ -56,8 +56,8 @@ jobs:
         file: ./apps/api/Dockerfile
         push: true
         tags: |
-          ${{ vars.AWS_ACCESS_KEY_ID }}.dkr.ecr.us-east-1.amazonaws.com/ship-nuxt-api:${{ github.sha }}
-          ${{ vars.AWS_ACCESS_KEY_ID }}.dkr.ecr.us-east-1.amazonaws.com/ship-nuxt-api:latest
+          306011031365.dkr.ecr.us-east-1.amazonaws.com/ship-nuxt-api:${{ github.sha }}
+          306011031365.dkr.ecr.us-east-1.amazonaws.com/ship-nuxt-api:latest
         build-args: |
           APP_ENV=production
 
@@ -91,8 +91,8 @@ jobs:
         file: ./apps/web/Dockerfile
         push: true
         tags: |
-          ${{ vars.AWS_ACCESS_KEY_ID }}.dkr.ecr.us-east-1.amazonaws.com/ship-nuxt-web:${{ github.sha }}
-          ${{ vars.AWS_ACCESS_KEY_ID }}.dkr.ecr.us-east-1.amazonaws.com/ship-nuxt-web:latest
+          306011031365.dkr.ecr.us-east-1.amazonaws.com/ship-nuxt-web:${{ github.sha }}
+          306011031365.dkr.ecr.us-east-1.amazonaws.com/ship-nuxt-web:latest
         build-args: |
           APP_ENV=production
 
@@ -123,7 +123,7 @@ jobs:
       env:
         NAMESPACE: production
         IMAGE_TAG: ${{ github.sha }}
-        ECR_REGISTRY: ${{ vars.AWS_ACCESS_KEY_ID }}.dkr.ecr.us-east-1.amazonaws.com
+        ECR_REGISTRY: 306011031365.dkr.ecr.us-east-1.amazonaws.com
         SSL_CERTIFICATE_ARN: ${{ vars.SSL_CERTIFICATE_ARN }}
       run: |
         # Create namespace
@@ -162,13 +162,13 @@ jobs:
       env:
         NAMESPACE: production
         IMAGE_TAG: ${{ github.sha }}
-        ECR_REGISTRY: ${{ vars.AWS_ACCESS_KEY_ID }}.dkr.ecr.us-east-1.amazonaws.com
+        ECR_REGISTRY: 306011031365.dkr.ecr.us-east-1.amazonaws.com
         SSL_CERTIFICATE_ARN: ${{ vars.SSL_CERTIFICATE_ARN }}
-        API_URL: https://api.ship-vue.dedyn.io
-        WS_URL: https://api.ship-vue.dedyn.io
-        WEB_URL: https://ship-vue.dedyn.io
-        WEB_DOMAIN: ship-vue.dedyn.io
-        API_DOMAIN: api.ship-vue.dedyn.io
+        API_URL: https://api.ship-nuxt.dedyn.io
+        WS_URL: https://api.ship-nuxt.dedyn.io
+        WEB_URL: https://ship-nuxt.dedyn.io
+        WEB_DOMAIN: ship-nuxt.dedyn.io
+        API_DOMAIN: api.ship-nuxt.dedyn.io
       run: |
         # Create namespace
         kubectl apply -f k8s/deployments/namespace.yaml
@@ -201,8 +201,8 @@ jobs:
         echo "**Trigger:** ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "### 🌐 Application URLs" >> $GITHUB_STEP_SUMMARY
-        echo "- **Web:** https://ship-vue.dedyn.io" >> $GITHUB_STEP_SUMMARY
-        echo "- **API:** https://api.ship-vue.dedyn.io" >> $GITHUB_STEP_SUMMARY
+        echo "- **Web:** https://ship-nuxt.dedyn.io" >> $GITHUB_STEP_SUMMARY
+        echo "- **API:** https://api.ship-nuxt.dedyn.io" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "### 📊 Deployment Status" >> $GITHUB_STEP_SUMMARY
         echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
