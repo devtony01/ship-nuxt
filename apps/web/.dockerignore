@@ -6,12 +6,15 @@
 # testing
 /coverage
 
-# next.js
-/.next/
-/out/
-
-# production
+# build output
+/dist
 /build
+
+# development
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
 # misc
 .DS_Store
@@ -31,3 +34,10 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+
+# vite
+.vite
+
+# IDE
+.vscode
+.idea

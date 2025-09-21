@@ -1,8 +1,9 @@
 {
-  "extends": "@ship-nuxt/tsconfig/nuxt.json",
+  "extends": "@ship-nuxt/tsconfig/vue.json",
   "compilerOptions": {
-    "baseUrl": "app",
-    "rootDir": "."
+    "target": "ES2017",
+    "baseUrl": "src",
+    "rootDir": ".",
   },
-  "include": ["app/**/*", "tests/**/*", "playwright.config.ts", ".nuxt/**/*.ts", ".nuxt/**/*.d.ts"]
+  "include": ["**/*.ts", "**/*.vue", "**/*.json"]
 }
