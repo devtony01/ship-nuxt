@@ -1,4 +1,6 @@
-# Ship Vue Fresh
+# Ship Vue
+
+> A modern full-stack application with Vue 3 + Express.js
 
 A full-stack application with Vue.js frontend and Express.js API, featuring automated database migrations and Kubernetes deployment.
 
