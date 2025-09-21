@@ -94,7 +94,7 @@ describe('pOST /account/sign-up', () => {
         template: 'VERIFY_EMAIL',
         params: {
           firstName: 'John',
-          href: expect.stringContaining('/account/verify-email?token=test-token-123'),
+          href: expect.stringContaining('/api/account/verify-email?token=test-token-123'),
         },
       });
 

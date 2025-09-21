@@ -7,6 +7,11 @@ const socket = io(config.WS_URL, {
   transports: ['websocket'],
   autoConnect: false,
   withCredentials: true,
+  reconnection: true,
+  reconnectionAttempts: 5,
+  reconnectionDelay: 1000,
+  reconnectionDelayMax: 5000,
+  timeout: 20000,
 })
 
 export const connect = async () => {
@@ -24,8 +29,24 @@ export const connect = async () => {
     console.error('Socket connection error:', error)
   })
 
-  socket.on('disconnect', () => {
-    console.warn('Socket disconnected')
+  socket.on('disconnect', (reason) => {
+    console.warn('Socket disconnected:', reason)
+    if (reason === 'io server disconnect') {
+      // Server disconnected the socket, reconnect manually
+      socket.connect()
+    }
+  })
+
+  socket.on('reconnect', (attemptNumber) => {
+    console.warn('Socket reconnected after', attemptNumber, 'attempts')
+  })
+
+  socket.on('reconnect_error', (error) => {
+    console.error('Socket reconnection error:', error)
+  })
+
+  socket.on('reconnect_failed', () => {
+    console.error('Socket reconnection failed after all attempts')
   })
 }
 

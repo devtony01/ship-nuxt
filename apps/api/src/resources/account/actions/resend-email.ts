@@ -43,7 +43,7 @@ const handler: AppMiddleware = async (req: AppRequest, res: AppResponse) => {
     expiresIn: EMAIL_VERIFICATION_TOKEN.EXPIRATION_SECONDS,
   });
 
-  const emailVerificationUrl = new URL(`${config.API_URL}/account/verify-email`);
+  const emailVerificationUrl = new URL(`${config.API_URL}/api/account/verify-email`);
   emailVerificationUrl.searchParams.set('token', emailVerificationToken);
 
   await emailService.sendTemplate<Template.VERIFY_EMAIL>({

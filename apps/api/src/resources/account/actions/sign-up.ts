@@ -61,7 +61,7 @@ const handler: AppMiddleware = async (req: AppRequest, res: AppResponse) => {
       template: Template.VERIFY_EMAIL,
       params: {
         firstName: user.firstName,
-        href: `${config.API_URL}/account/verify-email?token=${emailVerificationToken}`,
+        href: `${config.API_URL}/api/account/verify-email?token=${emailVerificationToken}`,
       },
     });
   } catch (emailError) {
