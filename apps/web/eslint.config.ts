@@ -1,4 +1,4 @@
 // @ts-check
-import vueConfig from '@ship-nuxt/eslint-config/vue';
+import vueConfig from '@ship-nuxt/eslint-config/vue'
 
-export default vueConfig;
+export default vueConfig

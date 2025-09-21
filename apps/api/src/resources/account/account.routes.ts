@@ -1,4 +1,3 @@
-
 import { routeUtil } from 'utils';
 
 import forgotPasswordAction from './actions/forgot-password';

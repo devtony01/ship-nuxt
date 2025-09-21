@@ -19,12 +19,12 @@ const validator: AppMiddleware = async (req: AppRequest, res: AppResponse, next)
   const { token } = req.validatedData as ResetPasswordParams;
 
   const resetPasswordToken = await tokenService.validateToken(token, TokenType.RESET_PASSWORD);
-  
+
   if (!resetPasswordToken || !resetPasswordToken.userId) {
     res.status(204).send();
     return;
   }
-  
+
   const user = await userService.findOne(eq(users.id, resetPasswordToken.userId));
 
   if (!user) {

@@ -43,7 +43,7 @@ declare global {
       validatedData?: unknown;
       files?: unknown;
     }
-    
+
     interface Response {
       throwError: (message: string, status?: number) => never;
       assertError: (condition: unknown, message: string, status?: number) => asserts condition;

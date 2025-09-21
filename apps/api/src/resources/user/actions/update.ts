@@ -28,10 +28,7 @@ const handler: AppMiddleware = async (req: AppRequest, res: AppResponse) => {
 
   const nonEmptyValues = _.pickBy(data, (value) => !_.isUndefined(value));
 
-  const updatedUser = await userService.updateOne(
-    eq(users.id, Number.parseInt(id, 10)),
-    () => nonEmptyValues
-  );
+  const updatedUser = await userService.updateOne(eq(users.id, Number.parseInt(id, 10)), () => nonEmptyValues);
 
   res.json({
     user: userService.getPublic(updatedUser),

@@ -1,5 +1,5 @@
-import type {TemplateProps} from '@ship-nuxt/mailer';
-import { Template  } from '@ship-nuxt/mailer';
+import type { TemplateProps } from '@ship-nuxt/mailer';
+import { Template } from '@ship-nuxt/mailer';
 import { Buffer } from 'node:buffer';
 
 export interface From {

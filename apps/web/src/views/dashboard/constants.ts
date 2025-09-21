@@ -23,34 +23,34 @@ export const COLUMNS: ColumnDef<User>[] = [
   {
     accessorKey: 'id',
     header: 'ID',
-    cell: info => info.getValue(),
+    cell: (info) => info.getValue(),
   },
   {
     accessorKey: 'firstName',
     header: 'First Name',
-    cell: info => info.getValue(),
+    cell: (info) => info.getValue(),
     enableSorting: true,
   },
   {
     accessorKey: 'lastName',
     header: 'Last Name',
-    cell: info => info.getValue(),
+    cell: (info) => info.getValue(),
     enableSorting: true,
   },
   {
     accessorKey: 'email',
     header: 'Email',
-    cell: info => info.getValue(),
+    cell: (info) => info.getValue(),
   },
   {
     accessorKey: 'isEmailVerified',
     header: 'Verified',
-    cell: info => info.getValue() ? '✅' : '❌',
+    cell: (info) => (info.getValue() ? '✅' : '❌'),
   },
   {
     accessorKey: 'createdAt',
     header: 'Created',
-    cell: info => new Date(info.getValue() as string).toLocaleDateString(),
+    cell: (info) => new Date(info.getValue() as string).toLocaleDateString(),
     enableSorting: true,
   },
 ]

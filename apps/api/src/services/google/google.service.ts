@@ -55,16 +55,11 @@ const handleExistingUser = async (userId: string) => {
   // For SQL with JSON fields, we need to get all users and filter in memory
   // In a production app, you'd want to add a separate oauth_accounts table for better querying
   const allUsers = await userService.find();
-  const existingUser = allUsers.results.find((user) => 
-    user.oauth?.google?.userId === userId
-  );
+  const existingUser = allUsers.results.find((user) => user.oauth?.google?.userId === userId);
 
   if (existingUser) {
     // Update last request
-    await userService.updateOne(
-      eq(users.id, existingUser.id),
-      (doc) => ({ ...doc, lastRequest: new Date() })
-    );
+    await userService.updateOne(eq(users.id, existingUser.id), (doc) => ({ ...doc, lastRequest: new Date() }));
 
     return existingUser;
   }
@@ -76,19 +71,16 @@ const handleExistingUserByEmail = async (email: string, googleUserId: string) =>
   const existingUserByEmail = await userService.findOne(eq(users.email, email));
 
   if (existingUserByEmail) {
-    await userService.updateOne(
-      eq(users.id, existingUserByEmail.id),
-      (doc) => ({
-        ...doc,
-        oauth: {
-          google: {
-            userId: googleUserId,
-            connectedOn: new Date(),
-          },
+    await userService.updateOne(eq(users.id, existingUserByEmail.id), (doc) => ({
+      ...doc,
+      oauth: {
+        google: {
+          userId: googleUserId,
+          connectedOn: new Date(),
         },
-        lastRequest: new Date(),
-      })
-    );
+      },
+      lastRequest: new Date(),
+    }));
 
     return existingUserByEmail;
   }

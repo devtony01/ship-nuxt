@@ -8,12 +8,7 @@ import './resources/user/user.handler'
 <template>
   <div>
     <RouterView />
-    <Toaster
-      rich-colors
-      position="top-right"
-      :toast-options="{ duration: 4000 }"
-      expand
-    />
+    <Toaster rich-colors position="top-right" :toast-options="{ duration: 4000 }" expand />
   </div>
 </template>
 

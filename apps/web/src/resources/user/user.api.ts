@@ -1,5 +1,5 @@
-import type {ComputedRef, Ref} from 'vue';
-import {  unref } from 'vue'
+import type { ComputedRef, Ref } from 'vue'
+import { unref } from 'vue'
 
 import { useQuery, UseQueryOptions } from '@tanstack/vue-query'
 import { apiService } from 'services'
@@ -21,7 +21,7 @@ export type UserListResponse = ListResult<User>
 
 export const useList = (
   params: Ref<UserListParams> | ComputedRef<UserListParams>,
-  options?: Partial<UseQueryOptions<UserListResponse, ApiError>>
+  options?: Partial<UseQueryOptions<UserListResponse, ApiError>>,
 ) =>
   useQuery<UserListResponse, ApiError>({
     queryKey: ['users', params],

@@ -25,7 +25,7 @@ const createToken = async ({ userId, type, expiresIn }: CreateTokenOptions): Pro
 
   const now = new Date();
   const expiresOn = new Date(now.getTime() + expiresIn * 1000);
-  
+
   const token = await service.insertOne({
     type,
     value,
@@ -41,7 +41,7 @@ const getToken = async (tokenId: number | undefined | null, type: TokenType) => 
 
   const whereClause = and(eq(tokens.id, tokenId), eq(tokens.type, type));
   if (!whereClause) return null;
-  
+
   const token = await service.findOne(whereClause);
 
   if (!token) return null;
@@ -118,7 +118,7 @@ const invalidateUserTokens = async (userId: number, type: TokenType): Promise<vo
 const getUserActiveToken = async (userId: number, type: TokenType) => {
   const whereClause = and(eq(tokens.userId, userId), eq(tokens.type, type));
   if (!whereClause) return null;
-  
+
   const token = await service.findOne(whereClause);
 
   if (!token) return null;

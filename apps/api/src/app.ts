@@ -30,10 +30,12 @@ const initExpress = (): express.Express => {
 
   app.set('trust proxy', true);
 
-  app.use(cors({
-    credentials: true,
-    origin: true // Reflect the request origin, similar to Koa's behavior
-  }));
+  app.use(
+    cors({
+      credentials: true,
+      origin: true, // Reflect the request origin, similar to Koa's behavior
+    }),
+  );
   app.use(helmet());
   app.use(express.json({ limit: '10mb' }));
   app.use(express.urlencoded({ extended: true, limit: '10mb' }));
@@ -41,7 +43,7 @@ const initExpress = (): express.Express => {
   // Request logging middleware
   app.use((req, res, next) => {
     const start = Date.now();
-    
+
     res.on('finish', () => {
       const duration = Date.now() - start;
       logger.http(`${req.method} ${req.originalUrl} ${res.statusCode} ${duration}ms`, {
@@ -52,7 +54,7 @@ const initExpress = (): express.Express => {
         length: res.get('content-length') || '0',
       });
     });
-    
+
     next();
   });
 

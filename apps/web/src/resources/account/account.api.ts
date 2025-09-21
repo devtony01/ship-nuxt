@@ -2,15 +2,15 @@ import { useMutation, useQuery, UseQueryOptions } from '@tanstack/vue-query'
 import queryClient from 'query-client'
 import { apiService } from 'services'
 
-import type { 
-  ApiError, 
-  ForgotPasswordParams, 
+import type {
+  ApiError,
+  ForgotPasswordParams,
   ResendEmailParams,
-  ResetPasswordParams, 
-  SignInParams, 
-  SignUpParams, 
+  ResetPasswordParams,
+  SignInParams,
+  SignUpParams,
   UpdateUserParams,
-  User 
+  User,
 } from 'types'
 
 export interface SignUpResponse {
@@ -28,7 +28,7 @@ const useSignIn = <T = SignInParams>() => {
     mutationFn: (data: T) => apiService.post<User, T>('/api/account/sign-in', data),
     onSuccess: (data) => {
       queryClient.setQueryData(['account'], data)
-    }
+    },
   })
 }
 
@@ -70,17 +70,17 @@ const useSignOut = () => {
     mutationFn: () => apiService.post<void, void>('/api/account/sign-out'),
     onSuccess: () => {
       queryClient.setQueryData(['account'], null)
-    }
+    },
   })
 }
 
-export { 
-  useForgotPassword, 
-  useGet, 
-  useResendEmail, 
-  useResetPassword, 
+export {
+  useForgotPassword,
+  useGet,
+  useResendEmail,
+  useResetPassword,
   useSignIn,
   useSignOut,
   useSignUp,
-  useUpdate
+  useUpdate,
 }

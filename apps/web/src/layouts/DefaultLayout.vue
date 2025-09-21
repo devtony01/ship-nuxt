@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { AppFooter, AppNavbar } from './components';
+import { AppFooter, AppNavbar } from './components'
 
 // If you localize later, this mirrors NuxSaaS i18n head behavior
 // const i18nHead = useLocaleHead()

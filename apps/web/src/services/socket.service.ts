@@ -1,14 +1,13 @@
-import config from 'config';
+import config from 'config'
 import io from 'socket.io-client'
 
 import type { User } from 'types'
 
-const socket = io(
-  config.WS_URL, {
-    transports: ['websocket'],
-    autoConnect: false,
-    withCredentials: true,
-  })
+const socket = io(config.WS_URL, {
+  transports: ['websocket'],
+  autoConnect: false,
+  withCredentials: true,
+})
 
 export const connect = async () => {
   if (socket.connected) {

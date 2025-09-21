@@ -28,10 +28,7 @@ const validator: AppMiddleware = async (req: AppRequest, res: AppResponse, next)
   });
 
   if (!user.isEmailVerified) {
-    const existingEmailVerificationToken = await tokenService.getUserActiveToken(
-      user.id,
-      TokenType.EMAIL_VERIFICATION,
-    );
+    const existingEmailVerificationToken = await tokenService.getUserActiveToken(user.id, TokenType.EMAIL_VERIFICATION);
 
     res.assertClientError(existingEmailVerificationToken, {
       emailVerificationTokenExpired: true,

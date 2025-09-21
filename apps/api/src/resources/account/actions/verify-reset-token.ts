@@ -16,18 +16,16 @@ const schema = z.object({
   token: z.string().min(1, 'Token is required'),
 });
 
-
-
 const handler: AppMiddleware = async (req: AppRequest, res: AppResponse) => {
   try {
     const { token } = req.validatedData as { token: string };
 
     const resetPasswordToken = await tokenService.validateToken(token, TokenType.RESET_PASSWORD);
-    
+
     if (!resetPasswordToken || !resetPasswordToken.userId) {
       return res.throwGlobalErrorWithRedirect('Token is invalid or expired.');
     }
-    
+
     const user = await userService.findOne(eq(users.id, resetPasswordToken.userId));
 
     if (!user) {

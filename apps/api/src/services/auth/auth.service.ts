@@ -1,6 +1,6 @@
 import { ACCESS_TOKEN } from '@ship-nuxt/app-constants';
 
-import type {Token} from 'resources/token';
+import type { Token } from 'resources/token';
 import { tokenService } from 'resources/token';
 import { userService } from 'resources/user';
 

@@ -4,13 +4,12 @@ describe('signup API Component Tests', () => {
   describe('schema Validation', () => {
     it('should validate signup schema structure', async () => {
       try {
-        
         // Test valid data
         const validData = {
           firstName: 'John',
           lastName: 'Doe',
           email: 'test@example.com',
-          password: 'SecurePassword123!'
+          password: 'SecurePassword123!',
         };
 
         const result = signUpSchema.safeParse(validData);
@@ -21,7 +20,7 @@ describe('signup API Component Tests', () => {
           firstName: 'John',
           lastName: 'Doe',
           email: 'invalid-email',
-          password: 'SecurePassword123!'
+          password: 'SecurePassword123!',
         };
 
         const invalidResult = signUpSchema.safeParse(invalidEmailData);
@@ -30,12 +29,11 @@ describe('signup API Component Tests', () => {
         // Test missing fields
         const incompleteData = {
           firstName: 'John',
-          email: 'test@example.com'
+          email: 'test@example.com',
         };
 
         const incompleteResult = signUpSchema.safeParse(incompleteData);
         expect(incompleteResult.success).toBe(false);
-
       } catch (error) {
         // If schema import fails, just pass the test
         expect(true).toBe(true);
@@ -50,7 +48,7 @@ describe('signup API Component Tests', () => {
           { password: '123', shouldPass: false, description: 'too short' },
           { password: 'password', shouldPass: false, description: 'no numbers/special chars' },
           { password: 'Password123!', shouldPass: true, description: 'valid password' },
-          { password: 'SecurePass123!', shouldPass: true, description: 'another valid password' }
+          { password: 'SecurePass123!', shouldPass: true, description: 'another valid password' },
         ];
 
         for (const testCase of testCases) {
@@ -58,13 +56,12 @@ describe('signup API Component Tests', () => {
             firstName: 'John',
             lastName: 'Doe',
             email: 'test@example.com',
-            password: testCase.password
+            password: testCase.password,
           };
 
           const result = signUpSchema.safeParse(data);
           expect(result.success).toBe(testCase.shouldPass);
         }
-
       } catch (error) {
         expect(true).toBe(true);
       }
@@ -86,7 +83,6 @@ describe('signup API Component Tests', () => {
         // Test that same password produces different hashes (salt)
         const hashedPassword2 = await securityUtil.hashPassword(password);
         expect(hashedPassword2).not.toBe(hashedPassword);
-
       } catch (error) {
         expect(true).toBe(true);
       }
@@ -100,7 +96,6 @@ describe('signup API Component Tests', () => {
 
         expect(emailService).toBeDefined();
         expect(emailService.sendTemplate).toBeDefined();
-
       } catch (error) {
         expect(true).toBe(true);
       }
@@ -115,7 +110,6 @@ describe('signup API Component Tests', () => {
         expect(userService).toBeDefined();
         expect(userService.findOne).toBeDefined();
         expect(userService.insertOne).toBeDefined();
-
       } catch (error) {
         expect(true).toBe(true);
       }
@@ -127,7 +121,6 @@ describe('signup API Component Tests', () => {
 
         expect(tokenService).toBeDefined();
         expect(tokenService.createToken).toBeDefined();
-
       } catch (error) {
         expect(true).toBe(true);
       }
@@ -140,9 +133,8 @@ describe('signup API Component Tests', () => {
         const config = await import('config');
 
         expect(config.default).toBeDefined();
-        
-        // Log some config values (non-sensitive)
 
+        // Log some config values (non-sensitive)
       } catch (error) {
         expect(true).toBe(true);
       }
@@ -156,7 +148,6 @@ describe('signup API Component Tests', () => {
 
         expect(signUpAction.default).toBeDefined();
         expect(typeof signUpAction.default).toBe('function');
-
       } catch (error) {
         expect(true).toBe(true);
       }
@@ -168,7 +159,6 @@ describe('signup API Component Tests', () => {
 
         expect(accountRoutes.default).toBeDefined();
         expect(accountRoutes.default.publicRoutes).toBeDefined();
-
       } catch (error) {
         expect(true).toBe(true);
       }
@@ -182,7 +172,6 @@ describe('signup API Component Tests', () => {
 
         expect(EMAIL_VERIFICATION_TOKEN).toBeDefined();
         expect(EMAIL_VERIFICATION_TOKEN.EXPIRATION_SECONDS).toBeDefined();
-
       } catch (error) {
         expect(true).toBe(true);
       }
@@ -194,7 +183,6 @@ describe('signup API Component Tests', () => {
 
         expect(types.Template).toBeDefined();
         expect(types.TokenType).toBeDefined();
-
       } catch (error) {
         expect(true).toBe(true);
       }

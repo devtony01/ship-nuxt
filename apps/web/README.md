@@ -76,12 +76,14 @@ yarn preview
 ## Docker
 
 ### Development
+
 ```bash
 docker build --target development -t web-dev .
 docker run -p 3002:3002 web-dev
 ```
 
 ### Production
+
 ```bash
 docker build --target runner -t web-prod .
 docker run -p 80:80 web-prod
@@ -96,6 +98,7 @@ cp .env .env.local
 ```
 
 Required variables:
+
 - `VITE_API_URL` - Backend API URL
 - `VITE_WS_URL` - WebSocket URL
 - `VITE_WEB_URL` - Frontend URL

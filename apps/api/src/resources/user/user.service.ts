@@ -13,12 +13,9 @@ const service = database.createService<User>(users, {
 });
 
 const updateLastRequest = (id: number) =>
-  service.atomic.updateOne(
-    eq(users.id, id),
-    {
-      lastRequest: new Date(),
-    },
-  );
+  service.atomic.updateOne(eq(users.id, id), {
+    lastRequest: new Date(),
+  });
 
 const privateFields = ['passwordHash'];
 

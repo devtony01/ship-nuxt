@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { computed,ref } from 'vue'
+import { computed, ref } from 'vue'
 import { toast } from 'vue-sonner'
 
 import { Table } from 'components'
-import type {UserListParams} from 'resources/user';
-import { userApi  } from 'resources/user'
+import type { UserListParams } from 'resources/user'
+import { userApi } from 'resources/user'
 
 import type { User } from 'types'
 
@@ -63,12 +63,8 @@ const onRowClick = (user: User) => {
       <div class="card bg-base-100 shadow-xl">
         <div class="card-body">
           <div class="flex items-center justify-between mb-6">
-            <h1 class="card-title text-3xl">
-              Users Dashboard
-            </h1>
-            <div class="badge badge-primary">
-              {{ usersData?.count || 0 }} total users
-            </div>
+            <h1 class="card-title text-3xl">Users Dashboard</h1>
+            <div class="badge badge-primary">{{ usersData?.count || 0 }} total users</div>
           </div>
 
           <!-- Search -->
@@ -82,18 +78,26 @@ const onRowClick = (user: User) => {
               placeholder="Search by name or email..."
               class="input input-bordered w-full"
               @input="onSearchChange(($event.target as HTMLInputElement).value)"
-            >
+            />
           </div>
 
           <!-- Error state -->
           <div v-if="error" class="alert alert-error mb-4">
-            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="stroke-current shrink-0 h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
             </svg>
             <div>
-              <h3 class="font-bold">
-                Failed to load users
-              </h3>
+              <h3 class="font-bold">Failed to load users</h3>
               <div class="text-xs">
                 {{ (error as any)?.data?.message || 'Please try again later.' }}
               </div>

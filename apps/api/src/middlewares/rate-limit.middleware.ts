@@ -1,7 +1,6 @@
 import { RequestHandler } from 'express';
 import rateLimit from 'express-rate-limit';
 
-
 interface RateLimitOptions {
   limitDuration?: number; // in seconds
   requestsPerDuration?: number;

@@ -21,11 +21,11 @@ const validator: AppMiddleware = async (req: AppRequest, res: AppResponse, next)
   const { token } = req.validatedData as VerifyEmailParams;
 
   const emailVerificationToken = await tokenService.validateToken(token, TokenType.EMAIL_VERIFICATION);
-  
+
   if (!emailVerificationToken) {
     return res.throwGlobalErrorWithRedirect('Token is invalid or expired.');
   }
-  
+
   const user = await userService.findOne(eq(users.id, emailVerificationToken.userId));
 
   if (!emailVerificationToken || !user) {

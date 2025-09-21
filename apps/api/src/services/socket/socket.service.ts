@@ -15,8 +15,8 @@ export default (server: http.Server) => {
   const io = new Server(server, {
     cors: {
       origin: true,
-      credentials: true
-    }
+      credentials: true,
+    },
   });
 
   const subClient = pubClient.duplicate();
@@ -30,9 +30,9 @@ export default (server: http.Server) => {
   io.use(async (socket, next) => {
     if (!socket.handshake.headers.cookie) return next(new Error('Cookie not found'));
 
-  const accessToken = socketHelper.getCookie(socket.handshake.headers.cookie, COOKIES.ACCESS_TOKEN) || undefined;
+    const accessToken = socketHelper.getCookie(socket.handshake.headers.cookie, COOKIES.ACCESS_TOKEN) || undefined;
 
-  const token = accessToken ? await authService.validateAccessToken(accessToken) : undefined;
+    const token = accessToken ? await authService.validateAccessToken(accessToken) : undefined;
 
     if (token) {
       socket.data = {

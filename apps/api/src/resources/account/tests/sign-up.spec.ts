@@ -4,27 +4,27 @@ import request from 'supertest';
 // Mock dependencies before importing the app
 jest.mock('services', () => ({
   emailService: {
-    sendTemplate: jest.fn().mockResolvedValue({ messageId: 'test-message-id' })
-  }
+    sendTemplate: jest.fn().mockResolvedValue({ messageId: 'test-message-id' }),
+  },
 }));
 
 jest.mock('resources/user', () => ({
   userService: {
     findOne: jest.fn(),
-    insertOne: jest.fn()
-  }
+    insertOne: jest.fn(),
+  },
 }));
 
 jest.mock('resources/token', () => ({
   tokenService: {
-    createToken: jest.fn().mockResolvedValue('test-token-123')
-  }
+    createToken: jest.fn().mockResolvedValue('test-token-123'),
+  },
 }));
 
 jest.mock('utils', () => ({
   securityUtil: {
-    hashPassword: jest.fn().mockResolvedValue('hashed-password-123')
-  }
+    hashPassword: jest.fn().mockResolvedValue('hashed-password-123'),
+  },
 }));
 
 describe('pOST /account/sign-up', () => {
@@ -41,11 +41,11 @@ describe('pOST /account/sign-up', () => {
     // Import app after mocks are set up
     const appModule = await import('app');
     app = appModule.default;
-    
+
     // Get mocked services
     const { userService: mockUserService } = await import('resources/user');
     const { emailService: mockEmailService } = await import('services');
-    
+
     userService = mockUserService as unknown as typeof userService;
     emailService = mockEmailService as unknown as typeof emailService;
   });
@@ -58,14 +58,14 @@ describe('pOST /account/sign-up', () => {
     it('should create a new user and send verification email', async () => {
       // Mock user doesn't exist
       userService.findOne.mockResolvedValue(null);
-      
+
       // Mock user creation
       const mockUser = {
         id: 'user-123',
         email: 'test@example.com',
         firstName: 'John',
         lastName: 'Doe',
-        isEmailVerified: false
+        isEmailVerified: false,
       };
       userService.insertOne.mockResolvedValue(mockUser);
 
@@ -73,13 +73,10 @@ describe('pOST /account/sign-up', () => {
         firstName: 'John',
         lastName: 'Doe',
         email: 'test@example.com',
-        password: 'SecurePassword123!'
+        password: 'SecurePassword123!',
       };
 
-      const response = await request(app)
-        .post('/account/sign-up')
-        .send(signUpData)
-        .expect(200); // Expecting 200 in development mode
+      const response = await request(app).post('/account/sign-up').send(signUpData).expect(200); // Expecting 200 in development mode
 
       // Verify user creation was called
       expect(userService.insertOne).toHaveBeenCalledWith({
@@ -87,7 +84,7 @@ describe('pOST /account/sign-up', () => {
         firstName: 'John',
         lastName: 'Doe',
         passwordHash: 'hashed-password-123',
-        isEmailVerified: false
+        isEmailVerified: false,
       });
 
       // Verify email was sent
@@ -97,8 +94,8 @@ describe('pOST /account/sign-up', () => {
         template: 'VERIFY_EMAIL',
         params: {
           firstName: 'John',
-          href: expect.stringContaining('/account/verify-email?token=test-token-123')
-        }
+          href: expect.stringContaining('/account/verify-email?token=test-token-123'),
+        },
       });
 
       // In development mode, should return token
@@ -115,20 +112,17 @@ describe('pOST /account/sign-up', () => {
         id: 'user-123',
         email: 'test@example.com',
         firstName: 'John',
-        lastName: 'Doe'
+        lastName: 'Doe',
       });
 
       const signUpData = {
         firstName: 'John',
         lastName: 'Doe',
         email: 'test@example.com',
-        password: 'SecurePassword123!'
+        password: 'SecurePassword123!',
       };
 
-      await request(app)
-        .post('/account/sign-up')
-        .send(signUpData)
-        .expect(204);
+      await request(app).post('/account/sign-up').send(signUpData).expect(204);
 
       // Restore environment
       process.env.NODE_ENV = originalEnv;
@@ -140,25 +134,22 @@ describe('pOST /account/sign-up', () => {
       // Mock user already exists
       userService.findOne.mockResolvedValue({
         id: 'existing-user',
-        email: 'existing@example.com'
+        email: 'existing@example.com',
       });
 
       const signUpData = {
         firstName: 'John',
         lastName: 'Doe',
         email: 'existing@example.com',
-        password: 'SecurePassword123!'
+        password: 'SecurePassword123!',
       };
 
-      const response = await request(app)
-        .post('/account/sign-up')
-        .send(signUpData)
-        .expect(400);
+      const response = await request(app).post('/account/sign-up').send(signUpData).expect(400);
 
       expect(response.body).toEqual({
         clientErrors: {
-          email: ['User with this email is already registered']
-        }
+          email: ['User with this email is already registered'],
+        },
       });
 
       // Should not create user or send email
@@ -171,13 +162,10 @@ describe('pOST /account/sign-up', () => {
         firstName: 'John',
         lastName: 'Doe',
         email: 'invalid-email',
-        password: 'SecurePassword123!'
+        password: 'SecurePassword123!',
       };
 
-      const response = await request(app)
-        .post('/account/sign-up')
-        .send(signUpData)
-        .expect(400);
+      const response = await request(app).post('/account/sign-up').send(signUpData).expect(400);
 
       expect(response.body).toHaveProperty('errors');
     });
@@ -187,13 +175,10 @@ describe('pOST /account/sign-up', () => {
         firstName: '',
         lastName: '',
         email: '',
-        password: ''
+        password: '',
       };
 
-      const response = await request(app)
-        .post('/account/sign-up')
-        .send(signUpData)
-        .expect(400);
+      const response = await request(app).post('/account/sign-up').send(signUpData).expect(400);
 
       expect(response.body).toHaveProperty('errors');
     });
@@ -203,13 +188,10 @@ describe('pOST /account/sign-up', () => {
         firstName: 'John',
         lastName: 'Doe',
         email: 'test@example.com',
-        password: '123'
+        password: '123',
       };
 
-      const response = await request(app)
-        .post('/account/sign-up')
-        .send(signUpData)
-        .expect(400);
+      const response = await request(app).post('/account/sign-up').send(signUpData).expect(400);
 
       expect(response.body).toHaveProperty('errors');
     });
@@ -222,29 +204,26 @@ describe('pOST /account/sign-up', () => {
         id: 'user-123',
         email: 'test@example.com',
         firstName: 'John',
-        lastName: 'Doe'
+        lastName: 'Doe',
       });
 
       const signUpData = {
         firstName: 'John',
         lastName: 'Doe',
         email: 'test@example.com',
-        password: 'SecurePassword123!'
+        password: 'SecurePassword123!',
       };
 
       // Make multiple requests quickly
-      const requests = Array.from({length: 10}).fill(null).map(() => 
-        request(app)
-          .post('/account/sign-up')
-          .send(signUpData)
-      );
+      const requests = Array.from({ length: 10 })
+        .fill(null)
+        .map(() => request(app).post('/account/sign-up').send(signUpData));
 
       const responses = await Promise.allSettled(requests);
-      
+
       // Some requests should be rate limited (429)
       const rateLimitedResponses = responses.filter(
-        (result) => result.status === 'fulfilled' && 
-        (result.value as { status: number }).status === 429
+        (result) => result.status === 'fulfilled' && (result.value as { status: number }).status === 429,
       );
 
       // Should have some rate limited responses if rate limiting is working
@@ -261,13 +240,10 @@ describe('pOST /account/sign-up', () => {
         firstName: 'John',
         lastName: 'Doe',
         email: 'test@example.com',
-        password: 'SecurePassword123!'
+        password: 'SecurePassword123!',
       };
 
-      const response = await request(app)
-        .post('/account/sign-up')
-        .send(signUpData)
-        .expect(500);
+      const response = await request(app).post('/account/sign-up').send(signUpData).expect(500);
 
       expect(response.body).toHaveProperty('error');
     });
@@ -278,9 +254,9 @@ describe('pOST /account/sign-up', () => {
         id: 'user-123',
         email: 'test@example.com',
         firstName: 'John',
-        lastName: 'Doe'
+        lastName: 'Doe',
       });
-      
+
       // Mock email service failure
       emailService.sendTemplate.mockRejectedValue(new Error('Email service unavailable'));
 
@@ -288,13 +264,10 @@ describe('pOST /account/sign-up', () => {
         firstName: 'John',
         lastName: 'Doe',
         email: 'test@example.com',
-        password: 'SecurePassword123!'
+        password: 'SecurePassword123!',
       };
 
-      const response = await request(app)
-        .post('/account/sign-up')
-        .send(signUpData)
-        .expect(500);
+      const response = await request(app).post('/account/sign-up').send(signUpData).expect(500);
 
       expect(response.body).toHaveProperty('error');
     });
@@ -307,33 +280,30 @@ describe('pOST /account/sign-up', () => {
         id: 'user-123',
         email: 'test@example.com',
         firstName: 'John',
-        lastName: 'Doe'
+        lastName: 'Doe',
       });
 
       const signUpData = {
         firstName: 'John',
         lastName: 'Doe',
         email: 'test@example.com',
-        password: 'SecurePassword123!'
+        password: 'SecurePassword123!',
       };
 
-      await request(app)
-        .post('/account/sign-up')
-        .send(signUpData)
-        .expect(200);
+      await request(app).post('/account/sign-up').send(signUpData).expect(200);
 
       // Verify password was hashed
       expect(userService.insertOne).toHaveBeenCalledWith(
         expect.objectContaining({
-          passwordHash: 'hashed-password-123'
-        })
+          passwordHash: 'hashed-password-123',
+        }),
       );
 
       // Verify raw password is not stored
       expect(userService.insertOne).not.toHaveBeenCalledWith(
         expect.objectContaining({
-          password: 'SecurePassword123!'
-        })
+          password: 'SecurePassword123!',
+        }),
       );
     });
 
@@ -344,20 +314,17 @@ describe('pOST /account/sign-up', () => {
         email: 'test@example.com',
         firstName: 'John',
         lastName: 'Doe',
-        passwordHash: 'hashed-password-123'
+        passwordHash: 'hashed-password-123',
       });
 
       const signUpData = {
         firstName: 'John',
         lastName: 'Doe',
         email: 'test@example.com',
-        password: 'SecurePassword123!'
+        password: 'SecurePassword123!',
       };
 
-      const response = await request(app)
-        .post('/account/sign-up')
-        .send(signUpData)
-        .expect(200);
+      const response = await request(app).post('/account/sign-up').send(signUpData).expect(200);
 
       // Should not return password hash or user details
       expect(response.body).not.toHaveProperty('passwordHash');

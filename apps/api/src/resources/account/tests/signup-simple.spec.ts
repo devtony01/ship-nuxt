@@ -1,4 +1,3 @@
-
 import { signUpSchema } from '@ship-nuxt/schemas';
 
 // Simple test to verify signup functionality
@@ -7,13 +6,12 @@ describe('signup Tests', () => {
   describe('signup Schema Validation', () => {
     it('should validate signup schema structure', async () => {
       try {
-        
         // Test valid data
         const validData = {
           firstName: 'John',
           lastName: 'Doe',
           email: 'test@example.com',
-          password: 'SecurePassword123!'
+          password: 'SecurePassword123!',
         };
 
         const result = signUpSchema.safeParse(validData);
@@ -24,7 +22,7 @@ describe('signup Tests', () => {
           firstName: 'John',
           lastName: 'Doe',
           email: 'invalid-email',
-          password: 'SecurePassword123!'
+          password: 'SecurePassword123!',
         };
 
         const invalidResult = signUpSchema.safeParse(invalidEmailData);
@@ -33,12 +31,11 @@ describe('signup Tests', () => {
         // Test missing fields
         const incompleteData = {
           firstName: 'John',
-          email: 'test@example.com'
+          email: 'test@example.com',
         };
 
         const incompleteResult = signUpSchema.safeParse(incompleteData);
         expect(incompleteResult.success).toBe(false);
-
       } catch (error) {
         // If schema import fails, just pass the test
         expect(true).toBe(true);
@@ -53,7 +50,7 @@ describe('signup Tests', () => {
           { password: '123', shouldPass: false, description: 'too short' },
           { password: 'password', shouldPass: false, description: 'no numbers/special chars' },
           { password: 'Password123!', shouldPass: true, description: 'valid password' },
-          { password: 'SecurePass123!', shouldPass: true, description: 'another valid password' }
+          { password: 'SecurePass123!', shouldPass: true, description: 'another valid password' },
         ];
 
         for (const testCase of testCases) {
@@ -61,13 +58,12 @@ describe('signup Tests', () => {
             firstName: 'John',
             lastName: 'Doe',
             email: 'test@example.com',
-            password: testCase.password
+            password: testCase.password,
           };
 
           const result = signUpSchema.safeParse(data);
           expect(result.success).toBe(testCase.shouldPass);
         }
-
       } catch (error) {
         expect(true).toBe(true);
       }
@@ -96,7 +92,6 @@ describe('signup Tests', () => {
         // Test that same password produces different hashes (salt)
         const hashedPassword2 = await hashPassword(password);
         expect(hashedPassword2).not.toBe(hashedPassword);
-
       } catch (error) {
         expect(true).toBe(true);
       }
@@ -110,7 +105,6 @@ describe('signup Tests', () => {
 
         expect(emailService).toBeDefined();
         expect(emailService.sendTemplate).toBeDefined();
-
       } catch (error) {
         expect(true).toBe(true);
       }
@@ -125,7 +119,6 @@ describe('signup Tests', () => {
         expect(userService).toBeDefined();
         expect(userService.findOne).toBeDefined();
         expect(userService.insertOne).toBeDefined();
-
       } catch (error) {
         expect(true).toBe(true);
       }
@@ -137,7 +130,6 @@ describe('signup Tests', () => {
 
         expect(tokenService).toBeDefined();
         expect(tokenService.createToken).toBeDefined();
-
       } catch (error) {
         expect(true).toBe(true);
       }
@@ -150,9 +142,8 @@ describe('signup Tests', () => {
         const config = await import('config');
 
         expect(config.default).toBeDefined();
-        
-        // Log some config values (non-sensitive)
 
+        // Log some config values (non-sensitive)
       } catch (error) {
         expect(true).toBe(true);
       }
@@ -166,7 +157,6 @@ describe('signup Tests', () => {
 
         expect(signUpAction.default).toBeDefined();
         expect(typeof signUpAction.default).toBe('function');
-
       } catch (error) {
         expect(true).toBe(true);
       }
@@ -178,7 +168,6 @@ describe('signup Tests', () => {
 
         expect(accountRoutes.default).toBeDefined();
         expect(accountRoutes.default.publicRoutes).toBeDefined();
-
       } catch (error) {
         expect(true).toBe(true);
       }

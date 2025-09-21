@@ -40,7 +40,7 @@ const onSubmit = handleSubmit((values: ForgotPasswordInput, ctx) => {
     onError: (e: ApiError) => {
       const errors = handleApiError(e, ctx.setErrors)
       apiErrors.value = errors
-    }
+    },
   })
 })
 
@@ -57,16 +57,12 @@ const onSubmit = handleSubmit((values: ForgotPasswordInput, ctx) => {
   <UnauthorizedLayout>
     <div class="w-full max-w-md">
       <div class="text-center mb-6">
-        <h2 class="text-3xl font-extrabold">
-          Forgot Password
-        </h2>
+        <h2 class="text-3xl font-extrabold">Forgot Password</h2>
       </div>
 
       <div v-if="isSubmitted" class="card bg-base-100 shadow-xl">
         <div class="card-body items-center text-center space-y-2">
-          <h3 class="card-title">
-            Check Your Email
-          </h3>
+          <h3 class="card-title">Check Your Email</h3>
           <p class="text-base-content/70">
             We've sent password reset instructions to
             <span class="font-semibold">{{ submittedEmail }}</span>
@@ -75,9 +71,7 @@ const onSubmit = handleSubmit((values: ForgotPasswordInput, ctx) => {
             Please check your email and follow the instructions to reset your password.
           </p>
           <div class="pt-4">
-            <RouterLink to="/sign-in" class="btn btn-primary">
-              Back to Sign In
-            </RouterLink>
+            <RouterLink to="/sign-in" class="btn btn-primary"> Back to Sign In </RouterLink>
           </div>
         </div>
       </div>
@@ -94,11 +88,18 @@ const onSubmit = handleSubmit((values: ForgotPasswordInput, ctx) => {
             </label>
             <input
               id="email"
-              v-model="email" name="email" type="email"
-              class="input input-bordered w-full" :class="[{ 'input-error': !!errors.email }]"
-              placeholder="Enter email address" autocomplete="email" required :aria-invalid="!!errors.email"
-              aria-describedby="email-help" :disabled="isLoading"
-            >
+              v-model="email"
+              name="email"
+              type="email"
+              class="input input-bordered w-full"
+              :class="[{ 'input-error': !!errors.email }]"
+              placeholder="Enter email address"
+              autocomplete="email"
+              required
+              :aria-invalid="!!errors.email"
+              aria-describedby="email-help"
+              :disabled="isLoading"
+            />
             <p v-if="errors.email" id="email-help" class="mt-1 label-text-alt text-error">
               {{ errors.email }}
             </p>
@@ -107,8 +108,18 @@ const onSubmit = handleSubmit((values: ForgotPasswordInput, ctx) => {
           <!-- API Error Display -->
           <div v-if="Object.keys(apiErrors).length > 0" class="space-y-2">
             <div v-for="(error, key) in apiErrors" :key="key" class="alert alert-error">
-              <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="stroke-current shrink-0 h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
               </svg>
               <span>{{ error }}</span>
             </div>
@@ -116,8 +127,10 @@ const onSubmit = handleSubmit((values: ForgotPasswordInput, ctx) => {
 
           <div class="form-control mt-6">
             <button
-              type="submit" :disabled="isLoading || !email"
-              class="btn btn-primary w-full" :class="[{ 'btn-disabled': isLoading || !email, loading: isLoading }]"
+              type="submit"
+              :disabled="isLoading || !email"
+              class="btn btn-primary w-full"
+              :class="[{ 'btn-disabled': isLoading || !email, loading: isLoading }]"
             >
               <span>{{ isLoading ? 'Sending...' : 'Send Reset Instructions' }}</span>
             </button>
@@ -125,9 +138,7 @@ const onSubmit = handleSubmit((values: ForgotPasswordInput, ctx) => {
 
           <div class="text-center">
             <span class="text-sm opacity-70">Remember your password? </span>
-            <RouterLink to="/sign-in" class="link link-primary text-sm">
-              Sign In
-            </RouterLink>
+            <RouterLink to="/sign-in" class="link link-primary text-sm"> Sign In </RouterLink>
           </div>
         </div>
       </form>

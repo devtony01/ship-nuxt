@@ -7,13 +7,13 @@ import Table from '../Table/index.vue'
 describe('table', () => {
   const mockData = [
     { id: 1, name: 'John Doe', email: 'john@example.com' },
-    { id: 2, name: 'Jane Smith', email: 'jane@example.com' }
+    { id: 2, name: 'Jane Smith', email: 'jane@example.com' },
   ]
 
   const mockColumns = [
     { accessorKey: 'id', header: 'ID' },
     { accessorKey: 'name', header: 'Name' },
-    { accessorKey: 'email', header: 'Email' }
+    { accessorKey: 'email', header: 'Email' },
   ]
 
   it('renders properly with data', () => {
@@ -25,10 +25,10 @@ describe('table', () => {
         pageCount: 1,
         page: 1,
         perPage: 10,
-        isLoading: false
-      }
+        isLoading: false,
+      },
     })
-    
+
     expect(wrapper.find('table').exists()).toBe(true)
     expect(wrapper.text()).toContain('John Doe')
     expect(wrapper.text()).toContain('jane@example.com')
@@ -43,10 +43,10 @@ describe('table', () => {
         pageCount: 0,
         page: 1,
         perPage: 10,
-        isLoading: true
-      }
+        isLoading: true,
+      },
     })
-    
+
     expect(wrapper.find('.loading').exists()).toBe(true)
   })
 })

@@ -1,9 +1,8 @@
+import { drizzle } from 'drizzle-orm/mysql2';
 import { migrate } from 'drizzle-orm/mysql2/migrator';
 import { createConnection } from 'mysql2/promise';
-import { drizzle } from 'drizzle-orm/mysql2';
 import { join } from 'node:path';
-import { env } from 'node:process';
-import process from 'node:process';
+import process, { env } from 'node:process';
 
 import logger from 'logger';
 
@@ -28,10 +27,10 @@ const exec = async () => {
     await migrate(db, { migrationsFolder });
 
     logger.info('[Migrator] ✅ Database migrations completed successfully!');
-    
+
     // Close connection
     await connection.end();
-    
+
     process.exit(0);
   } catch (error) {
     logger.error('[Migrator] ❌ Migration failed:', error);

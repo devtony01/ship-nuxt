@@ -18,9 +18,11 @@ const { mutateAsync: signOut, isPending: isSigningOut } = accountApi.useSignOut(
 const userInitial = computed(() => {
   if (!user.value) return 'U'
 
-  return user.value.firstName?.charAt(0)?.toUpperCase() ||
+  return (
+    user.value.firstName?.charAt(0)?.toUpperCase() ||
     user.value.email?.charAt(0)?.toUpperCase() ||
     'U'
+  )
 })
 
 const userFullName = computed(() => {
@@ -45,9 +47,7 @@ const onSignOut = async () => {
 <template>
   <div class="navbar bg-base-200 border-b border-base-300 fixed top-0 left-0 right-0 z-50">
     <div class="flex-1">
-      <RouterLink to="/" class="btn btn-ghost text-xl">
-        Ship Vue
-      </RouterLink>
+      <RouterLink to="/" class="btn btn-ghost text-xl"> Ship Vue </RouterLink>
     </div>
 
     <!-- Center area: filled by pages via <template #nav-center> -->
@@ -68,29 +68,30 @@ const onSignOut = async () => {
         <!-- Show authenticated user menu -->
         <div v-else-if="user" class="dropdown dropdown-end">
           <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
-            <div class="w-8 h-8 rounded-full bg-primary text-primary-content !flex items-center justify-center">
+            <div
+              class="w-8 h-8 rounded-full bg-primary text-primary-content !flex items-center justify-center"
+            >
               <span class="text-sm font-medium leading-none">
                 {{ userInitial }}
               </span>
             </div>
           </div>
-          <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+          <ul
+            tabindex="0"
+            class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+          >
             <li class="menu-title">
               <span>{{ userFullName }}</span>
             </li>
             <li>
-              <RouterLink to="/dashboard">
-                Dashboard
-              </RouterLink>
+              <RouterLink to="/dashboard"> Dashboard </RouterLink>
             </li>
             <li>
-              <RouterLink to="/profile">
-                Profile
-              </RouterLink>
+              <RouterLink to="/profile"> Profile </RouterLink>
             </li>
             <li><a>Settings</a></li>
             <li>
-              <hr class="my-2">
+              <hr class="my-2" />
             </li>
             <li>
               <button :disabled="isSigningOut" class="w-full text-left" @click="onSignOut">
@@ -102,12 +103,8 @@ const onSignOut = async () => {
 
         <!-- Show auth buttons for unauthenticated users -->
         <div v-else class="flex items-center gap-2">
-          <RouterLink to="/sign-in" class="btn btn-ghost btn-sm">
-            Sign In
-          </RouterLink>
-          <RouterLink to="/sign-up" class="btn btn-primary btn-sm">
-            Sign Up
-          </RouterLink>
+          <RouterLink to="/sign-in" class="btn btn-ghost btn-sm"> Sign In </RouterLink>
+          <RouterLink to="/sign-up" class="btn btn-primary btn-sm"> Sign Up </RouterLink>
         </div>
       </slot>
     </div>

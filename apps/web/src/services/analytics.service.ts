@@ -1,12 +1,10 @@
-import config from 'config';
+import config from 'config'
 import mixpanel from 'mixpanel-browser'
 
 import type { User } from 'types'
 
 export const init = () => {
-  mixpanel.init(config.MIXPANEL_API_KEY ?? '',
-    { debug: config.IS_DEV }
-  )
+  mixpanel.init(config.MIXPANEL_API_KEY ?? '', { debug: config.IS_DEV })
 }
 
 export const setUser = (user: User | undefined) => {

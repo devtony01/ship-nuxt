@@ -18,7 +18,6 @@ const tryToAttachUser: AppMiddleware = async (req: AppRequest, res: AppResponse,
     if (user) {
       await userService.updateLastRequest(token.userId);
       req.user = user;
-
     }
   }
 

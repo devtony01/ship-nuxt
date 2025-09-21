@@ -19,11 +19,7 @@ const handler: AppMiddleware = async (req: AppRequest, res: AppResponse) => {
     const searchFields = [users.firstName, users.lastName, users.email];
     const searchTerm = `%${searchValue.toLowerCase()}%`;
 
-    filterOptions.push(
-      or(...searchFields.map((field) => 
-        like(sql`LOWER(${field})`, searchTerm)
-      ))
-    );
+    filterOptions.push(or(...searchFields.map((field) => like(sql`LOWER(${field})`, searchTerm))));
   }
 
   if (filter?.createdAt) {
@@ -42,7 +38,7 @@ const handler: AppMiddleware = async (req: AppRequest, res: AppResponse) => {
   const result = await userService.find(
     filterOptions.length ? and(...filterOptions) : undefined,
     { page, perPage },
-    { orderBy: sort || { createdAt: 'desc' } }
+    { orderBy: sort || { createdAt: 'desc' } },
   );
 
   res.json({ ...result, results: result.results.map(userService.getPublic) });

@@ -57,15 +57,11 @@ interface SetTokensOptions {
 }
 
 const setTokens = async ({ req, res, accessToken, expiresIn }: SetTokensOptions) => {
-  res.cookie(
-    COOKIES.ACCESS_TOKEN,
-    accessToken,
-    {
-      ...baseCookieOptions,
-      expires: new Date(Date.now() + expiresIn * 1000),
-      secure: req.secure,
-    },
-  );
+  res.cookie(COOKIES.ACCESS_TOKEN, accessToken, {
+    ...baseCookieOptions,
+    expires: new Date(Date.now() + expiresIn * 1000),
+    secure: req.secure,
+  });
 };
 
 interface UnsetTokensOptions {
@@ -74,15 +70,11 @@ interface UnsetTokensOptions {
 }
 
 const unsetTokens = async ({ req, res }: UnsetTokensOptions) => {
-  res.cookie(
-    COOKIES.ACCESS_TOKEN,
-    '',
-    {
-      ...baseCookieOptions,
-      maxAge: 0,
-      secure: req.secure,
-    },
-  );
+  res.cookie(COOKIES.ACCESS_TOKEN, '', {
+    ...baseCookieOptions,
+    maxAge: 0,
+    secure: req.secure,
+  });
 };
 
 export default {

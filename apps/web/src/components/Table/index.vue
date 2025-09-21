@@ -1,28 +1,27 @@
 <script setup lang="ts" generic="T">
 import { computed, ref, watch } from 'vue'
 
-import type {ColumnDef, SortingState} from '@tanstack/vue-table';
-import {
-  FlexRender,
-  getCoreRowModel,
-  getSortedRowModel,
-  useVueTable} from '@tanstack/vue-table'
+import type { ColumnDef, SortingState } from '@tanstack/vue-table'
+import { FlexRender, getCoreRowModel, getSortedRowModel, useVueTable } from '@tanstack/vue-table'
 
-const props = withDefaults(defineProps<{
-  data?: T[]
-  totalCount?: number
-  columns: ColumnDef<T>[]
-  pageCount?: number
-  page?: number
-  perPage?: number
-  isLoading?: boolean
-}>(), {
-  data: () => [],
-  totalCount: 0,
-  page: 1,
-  perPage: 10,
-  isLoading: false
-})
+const props = withDefaults(
+  defineProps<{
+    data?: T[]
+    totalCount?: number
+    columns: ColumnDef<T>[]
+    pageCount?: number
+    page?: number
+    perPage?: number
+    isLoading?: boolean
+  }>(),
+  {
+    data: () => [],
+    totalCount: 0,
+    page: 1,
+    perPage: 10,
+    isLoading: false,
+  },
+)
 
 // Define emits
 const emit = defineEmits<{
@@ -34,17 +33,21 @@ const emit = defineEmits<{
 // Table state
 const sorting = ref<SortingState>([])
 const pagination = ref({
-  pageIndex: (props.page - 1) || 0,
+  pageIndex: props.page - 1 || 0,
   pageSize: props.perPage,
 })
 
 // Watch for external page changes
-watch(() => props.page, (newPage) => {
-  const newPageIndex = (newPage - 1) || 0
-  if (pagination.value.pageIndex !== newPageIndex) {
-    pagination.value.pageIndex = newPageIndex
-  }
-}, { immediate: true })
+watch(
+  () => props.page,
+  (newPage) => {
+    const newPageIndex = newPage - 1 || 0
+    if (pagination.value.pageIndex !== newPageIndex) {
+      pagination.value.pageIndex = newPageIndex
+    }
+  },
+  { immediate: true },
+)
 
 // Reactive data for table
 const tableData = computed(() => props.data || [])
@@ -57,22 +60,20 @@ const table = useVueTable({
   columns: props.columns,
   getCoreRowModel: getCoreRowModel(),
   getSortedRowModel: getSortedRowModel(),
-  onSortingChange: updaterOrValue => {
-    sorting.value = typeof updaterOrValue === 'function' 
-      ? updaterOrValue(sorting.value) 
-      : updaterOrValue
+  onSortingChange: (updaterOrValue) => {
+    sorting.value =
+      typeof updaterOrValue === 'function' ? updaterOrValue(sorting.value) : updaterOrValue
   },
-  onPaginationChange: updaterOrValue => {
-    const newPagination = typeof updaterOrValue === 'function'
-      ? updaterOrValue(pagination.value)
-      : updaterOrValue
-    
+  onPaginationChange: (updaterOrValue) => {
+    const newPagination =
+      typeof updaterOrValue === 'function' ? updaterOrValue(pagination.value) : updaterOrValue
+
     // Only update if the page actually changed to avoid infinite loops
     if (newPagination.pageIndex !== pagination.value.pageIndex) {
       pagination.value = newPagination
       emit('pageChange', newPagination.pageIndex + 1)
     }
-    
+
     // Handle page size changes
     if (newPagination.pageSize !== pagination.value.pageSize) {
       pagination.value = newPagination
@@ -80,8 +81,12 @@ const table = useVueTable({
     }
   },
   state: {
-    get sorting() { return sorting.value },
-    get pagination() { return pagination.value },
+    get sorting() {
+      return sorting.value
+    },
+    get pagination() {
+      return pagination.value
+    },
   },
   manualPagination: true,
   manualSorting: true,
@@ -91,13 +96,20 @@ const table = useVueTable({
 })
 
 // Watch sorting changes
-watch(sorting, (newSorting) => {
-  const sortObject = newSorting.reduce((acc, sort) => {
-    acc[sort.id] = sort.desc ? 'desc' : 'asc'
-    return acc
-  }, {} as Record<string, 'asc' | 'desc'>)
-  emit('sortingChange', sortObject)
-}, { deep: true })
+watch(
+  sorting,
+  (newSorting) => {
+    const sortObject = newSorting.reduce(
+      (acc, sort) => {
+        acc[sort.id] = sort.desc ? 'desc' : 'asc'
+        return acc
+      },
+      {} as Record<string, 'asc' | 'desc'>,
+    )
+    emit('sortingChange', sortObject)
+  },
+  { deep: true },
+)
 
 // Handle row click
 const handleRowClick = (row: T) => {
@@ -105,21 +117,33 @@ const handleRowClick = (row: T) => {
 }
 
 // Watch for per page changes
-watch(() => props.perPage, (newPerPage) => {
-  if (pagination.value.pageSize !== newPerPage) {
-    pagination.value.pageSize = newPerPage
-  }
-}, { immediate: true })
+watch(
+  () => props.perPage,
+  (newPerPage) => {
+    if (pagination.value.pageSize !== newPerPage) {
+      pagination.value.pageSize = newPerPage
+    }
+  },
+  { immediate: true },
+)
 
 // Watch for data changes to ensure table updates
-watch(() => props.data, () => {
-  // Force table to re-render when data changes
-}, { deep: true })
+watch(
+  () => props.data,
+  () => {
+    // Force table to re-render when data changes
+  },
+  { deep: true },
+)
 
 // Watch for total count changes to update page count
-watch(() => props.totalCount, () => {
-  // This will trigger table re-calculation
-}, { immediate: true })
+watch(
+  () => props.totalCount,
+  () => {
+    // This will trigger table re-calculation
+  },
+  { immediate: true },
+)
 </script>
 
 <template>
@@ -142,10 +166,7 @@ watch(() => props.totalCount, () => {
               @click="header.column.getToggleSortingHandler()?.($event)"
             >
               <div class="flex items-center gap-2">
-                <FlexRender
-                  :render="header.column.columnDef.header"
-                  :props="header.getContext()"
-                />
+                <FlexRender :render="header.column.columnDef.header" :props="header.getContext()" />
                 <span v-if="header.column.getIsSorted()">
                   {{ header.column.getIsSorted() === 'desc' ? '↓' : '↑' }}
                 </span>
@@ -154,17 +175,14 @@ watch(() => props.totalCount, () => {
           </tr>
         </thead>
         <tbody>
-          <tr 
-            v-for="row in table.getRowModel().rows" 
+          <tr
+            v-for="row in table.getRowModel().rows"
             :key="row.id"
             class="hover:bg-base-200 cursor-pointer"
             @click="handleRowClick(row.original)"
           >
             <td v-for="cell in row.getVisibleCells()" :key="cell.id">
-              <FlexRender
-                :render="cell.column.columnDef.cell"
-                :props="cell.getContext()"
-              />
+              <FlexRender :render="cell.column.columnDef.cell" :props="cell.getContext()" />
             </td>
           </tr>
         </tbody>
@@ -175,12 +193,18 @@ watch(() => props.totalCount, () => {
     <div class="flex items-center justify-between">
       <div class="flex items-center gap-2">
         <span class="text-sm">
-          Showing {{ table.getState().pagination.pageIndex * table.getState().pagination.pageSize + 1 }} 
-          to {{ Math.min((table.getState().pagination.pageIndex + 1) * table.getState().pagination.pageSize, totalCount) }} 
+          Showing
+          {{ table.getState().pagination.pageIndex * table.getState().pagination.pageSize + 1 }} to
+          {{
+            Math.min(
+              (table.getState().pagination.pageIndex + 1) * table.getState().pagination.pageSize,
+              totalCount,
+            )
+          }}
           of {{ totalCount }} results
         </span>
       </div>
-      
+
       <div class="join">
         <button
           class="join-item btn btn-sm"
@@ -189,11 +213,11 @@ watch(() => props.totalCount, () => {
         >
           Previous
         </button>
-        
+
         <button class="join-item btn btn-sm btn-active">
           Page {{ table.getState().pagination.pageIndex + 1 }} of {{ table.getPageCount() }}
         </button>
-        
+
         <button
           class="join-item btn btn-sm"
           :disabled="!table.getCanNextPage()"
@@ -210,18 +234,10 @@ watch(() => props.totalCount, () => {
           :value="table.getState().pagination.pageSize"
           @change="table.setPageSize(Number(($event.target as HTMLSelectElement).value))"
         >
-          <option value="5">
-            5
-          </option>
-          <option value="10">
-            10
-          </option>
-          <option value="20">
-            20
-          </option>
-          <option value="50">
-            50
-          </option>
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="50">50</option>
         </select>
       </div>
     </div>
@@ -229,8 +245,6 @@ watch(() => props.totalCount, () => {
 
   <!-- Empty state -->
   <div v-else class="text-center py-8">
-    <div class="text-base-content/50">
-      No data found
-    </div>
+    <div class="text-base-content/50">No data found</div>
   </div>
 </template>
