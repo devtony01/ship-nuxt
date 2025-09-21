@@ -6,8 +6,9 @@ node_modules/
 
 # production
 /dist
+/build
 
-# edtiors
+# editors
 .idea
 .vscode
 
@@ -28,3 +29,80 @@ yarn-error.log*
 
 # lockfiles
 pnpm-lock.yaml
+
+# Nuxt build artifacts
+.nuxt/
+.output/
+.nitro/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Database
+*.db
+*.sqlite
+
+# Logs
+logs/
+*.log
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Temporary files
+tmp/
+temp/
+
+# Kubernetes temporary files
+k8s/deployments/*-http.yaml
+k8s/deployments/ingress-with-default.yaml
+
+# Generated Kubernetes files (use templates instead)
+k8s/deployments/api-deployment.yaml
+k8s/deployments/web-deployment.yaml
+k8s/deployments/ingress.yaml
+
+# AWS/Infrastructure temporary files
+*.json.bak
+updated-policy.json
+
+# Docker
+.dockerignore
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+
+# Cache directories
+.cache/
+.parcel-cache/
+.next/
+.nuxt/
+.vuepress/dist/
+
+# Serverless directories
+.serverless/
+
+# FuseBox cache
+.fusebox/
+
+# DynamoDB Local files
+.dynamodb/
+
+# TernJS port file
+.tern-port
+
+# Stores VSCode versions used for testing VSCode extensions
+.vscode-test/
+
+# yarn v2
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*

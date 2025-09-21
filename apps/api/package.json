@@ -10,6 +10,7 @@
     "start": "ts-node src/app.ts",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
+    "migrate": "ts-node --transpile-only src/migrator.ts",
     "db:push": "drizzle-kit push",
     "schedule-dev": "NODE_ENV=development APP_ENV=development ts-node-dev --respawn --transpile-only --watch .env src/scheduler.ts",
     "schedule": "ts-node src/scheduler.ts",
@@ -58,11 +59,11 @@
     "resend": "4.5.2",
     "socket.io": "4.8.1",
     "tldts": "7.0.8",
+    "ts-node": "10.9.2",
+    "typescript": "catalog:",
     "vue": "^3.5.18",
     "winston": "3.17.0",
-    "zod": "catalog:",
-    "ts-node": "10.9.2",
-    "typescript": "catalog:"
+    "zod": "catalog:"
   },
   "devDependencies": {
     "@ship-nuxt/eslint-config": "workspace:*",

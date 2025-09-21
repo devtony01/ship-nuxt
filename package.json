@@ -3,7 +3,11 @@
   "description": "Vue.js + Express.js + MySQL full-stack application",
   "scripts": {
     "infra": "bash ./bin/start.sh mysql redis",
-    "turbo-start": "turbo run development",
+    "turbo-start": "turbo run dev --parallel",
+    "dev": "turbo run dev --parallel",
+    "dev:web": "turbo run dev --filter=web",
+    "dev:api": "turbo run dev --filter=api",
+    "dev:scheduler": "turbo run schedule-dev --filter=api",
     "start": "bash ./bin/run-all.sh",
     "test": "turbo run test",
     "test:api": "pnpm --filter api test",
@@ -30,7 +34,7 @@
     "turbo-windows-64": "2.5.4",
     "turbo-windows-arm64": "2.5.4"
   },
-  "packageManager": "pnpm@10.14.0",
+  "packageManager": "pnpm@9.5.0",
   "engines": {
     "node": ">= 22.13.0",
     "yarn": "please-use-pnpm",
