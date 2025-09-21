@@ -6,7 +6,7 @@
   <div class="grid grid-cols-1 sm:grid-cols-2">
     <!-- Left: Illustration (visible from sm and up) -->
     <div class="hidden sm:block h-screen">
-      <img src="/images/ship.svg" alt="App Info" class="h-full w-full object-cover" />
+      <img src="/images/ship.svg" alt="App Info" class="h-full w-full object-cover">
     </div>
 
     <!-- Right: Centered content -->

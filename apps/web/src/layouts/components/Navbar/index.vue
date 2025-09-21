@@ -47,7 +47,9 @@ const onSignOut = async () => {
 <template>
   <div class="navbar bg-base-200 border-b border-base-300 fixed top-0 left-0 right-0 z-50">
     <div class="flex-1">
-      <RouterLink to="/" class="btn btn-ghost text-xl"> Ship Vue </RouterLink>
+      <RouterLink to="/" class="btn btn-ghost text-xl">
+        Ship Vue
+      </RouterLink>
     </div>
 
     <!-- Center area: filled by pages via <template #nav-center> -->
@@ -84,14 +86,18 @@ const onSignOut = async () => {
               <span>{{ userFullName }}</span>
             </li>
             <li>
-              <RouterLink to="/dashboard"> Dashboard </RouterLink>
+              <RouterLink to="/dashboard">
+                Dashboard
+              </RouterLink>
             </li>
             <li>
-              <RouterLink to="/profile"> Profile </RouterLink>
+              <RouterLink to="/profile">
+                Profile
+              </RouterLink>
             </li>
             <li><a>Settings</a></li>
             <li>
-              <hr class="my-2" />
+              <hr class="my-2">
             </li>
             <li>
               <button :disabled="isSigningOut" class="w-full text-left" @click="onSignOut">
@@ -103,8 +109,12 @@ const onSignOut = async () => {
 
         <!-- Show auth buttons for unauthenticated users -->
         <div v-else class="flex items-center gap-2">
-          <RouterLink to="/sign-in" class="btn btn-ghost btn-sm"> Sign In </RouterLink>
-          <RouterLink to="/sign-up" class="btn btn-primary btn-sm"> Sign Up </RouterLink>
+          <RouterLink to="/sign-in" class="btn btn-ghost btn-sm">
+            Sign In
+          </RouterLink>
+          <RouterLink to="/sign-up" class="btn btn-primary btn-sm">
+            Sign Up
+          </RouterLink>
         </div>
       </slot>
     </div>

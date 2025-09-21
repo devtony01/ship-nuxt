@@ -63,8 +63,12 @@ const onRowClick = (user: User) => {
       <div class="card bg-base-100 shadow-xl">
         <div class="card-body">
           <div class="flex items-center justify-between mb-6">
-            <h1 class="card-title text-3xl">Users Dashboard</h1>
-            <div class="badge badge-primary">{{ usersData?.count || 0 }} total users</div>
+            <h1 class="card-title text-3xl">
+              Users Dashboard
+            </h1>
+            <div class="badge badge-primary">
+              {{ usersData?.count || 0 }} total users
+            </div>
           </div>
 
           <!-- Search -->
@@ -78,7 +82,7 @@ const onRowClick = (user: User) => {
               placeholder="Search by name or email..."
               class="input input-bordered w-full"
               @input="onSearchChange(($event.target as HTMLInputElement).value)"
-            />
+            >
           </div>
 
           <!-- Error state -->
@@ -97,7 +101,9 @@ const onRowClick = (user: User) => {
               />
             </svg>
             <div>
-              <h3 class="font-bold">Failed to load users</h3>
+              <h3 class="font-bold">
+                Failed to load users
+              </h3>
               <div class="text-xs">
                 {{ (error as any)?.data?.message || 'Please try again later.' }}
               </div>

@@ -234,10 +234,18 @@ watch(
           :value="table.getState().pagination.pageSize"
           @change="table.setPageSize(Number(($event.target as HTMLSelectElement).value))"
         >
-          <option value="5">5</option>
-          <option value="10">10</option>
-          <option value="20">20</option>
-          <option value="50">50</option>
+          <option value="5">
+            5
+          </option>
+          <option value="10">
+            10
+          </option>
+          <option value="20">
+            20
+          </option>
+          <option value="50">
+            50
+          </option>
         </select>
       </div>
     </div>
@@ -245,6 +253,8 @@ watch(
 
   <!-- Empty state -->
   <div v-else class="text-center py-8">
-    <div class="text-base-content/50">No data found</div>
+    <div class="text-base-content/50">
+      No data found
+    </div>
   </div>
 </template>

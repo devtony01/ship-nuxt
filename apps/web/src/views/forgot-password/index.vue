@@ -57,12 +57,16 @@ const onSubmit = handleSubmit((values: ForgotPasswordInput, ctx) => {
   <UnauthorizedLayout>
     <div class="w-full max-w-md">
       <div class="text-center mb-6">
-        <h2 class="text-3xl font-extrabold">Forgot Password</h2>
+        <h2 class="text-3xl font-extrabold">
+          Forgot Password
+        </h2>
       </div>
 
       <div v-if="isSubmitted" class="card bg-base-100 shadow-xl">
         <div class="card-body items-center text-center space-y-2">
-          <h3 class="card-title">Check Your Email</h3>
+          <h3 class="card-title">
+            Check Your Email
+          </h3>
           <p class="text-base-content/70">
             We've sent password reset instructions to
             <span class="font-semibold">{{ submittedEmail }}</span>
@@ -71,7 +75,9 @@ const onSubmit = handleSubmit((values: ForgotPasswordInput, ctx) => {
             Please check your email and follow the instructions to reset your password.
           </p>
           <div class="pt-4">
-            <RouterLink to="/sign-in" class="btn btn-primary"> Back to Sign In </RouterLink>
+            <RouterLink to="/sign-in" class="btn btn-primary">
+              Back to Sign In
+            </RouterLink>
           </div>
         </div>
       </div>
@@ -99,7 +105,7 @@ const onSubmit = handleSubmit((values: ForgotPasswordInput, ctx) => {
               :aria-invalid="!!errors.email"
               aria-describedby="email-help"
               :disabled="isLoading"
-            />
+            >
             <p v-if="errors.email" id="email-help" class="mt-1 label-text-alt text-error">
               {{ errors.email }}
             </p>
@@ -138,7 +144,9 @@ const onSubmit = handleSubmit((values: ForgotPasswordInput, ctx) => {
 
           <div class="text-center">
             <span class="text-sm opacity-70">Remember your password? </span>
-            <RouterLink to="/sign-in" class="link link-primary text-sm"> Sign In </RouterLink>
+            <RouterLink to="/sign-in" class="link link-primary text-sm">
+              Sign In
+            </RouterLink>
           </div>
         </div>
       </form>

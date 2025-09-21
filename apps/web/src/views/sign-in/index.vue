@@ -78,7 +78,9 @@ const onResendEmail = () => {
   <UnauthorizedLayout>
     <div class="w-full max-w-md">
       <div class="text-center mb-6">
-        <h2 class="text-3xl font-extrabold">Sign In</h2>
+        <h2 class="text-3xl font-extrabold">
+          Sign In
+        </h2>
       </div>
 
       <form class="card bg-base-100 shadow-xl" novalidate @submit.prevent="onSubmit">
@@ -100,7 +102,7 @@ const onResendEmail = () => {
               :aria-invalid="!!errors.email"
               aria-describedby="email-help"
               :disabled="isLoading"
-            />
+            >
             <p v-if="errors.email" id="email-help" class="mt-1 label-text-alt text-error">
               {{ errors.email }}
             </p>
@@ -123,7 +125,7 @@ const onResendEmail = () => {
               :aria-invalid="!!errors.password"
               aria-describedby="password-help"
               :disabled="isLoading"
-            />
+            >
             <p v-if="errors.password" id="password-help" class="mt-1 label-text-alt text-error">
               {{ errors.password }}
             </p>
@@ -192,7 +194,9 @@ const onResendEmail = () => {
             </button>
           </div>
 
-          <div class="divider">Or continue with</div>
+          <div class="divider">
+            Or continue with
+          </div>
 
           <a :href="`${config.API_URL}/api/account/sign-in/google`" class="btn btn-outline w-full">
             <svg class="w-5 h-5" viewBox="0 0 24 24">
@@ -218,7 +222,9 @@ const onResendEmail = () => {
 
           <div class="text-center">
             <span class="text-sm opacity-70">Don't have an account? </span>
-            <RouterLink to="/sign-up" class="link link-primary text-sm"> Sign Up </RouterLink>
+            <RouterLink to="/sign-up" class="link link-primary text-sm">
+              Sign Up
+            </RouterLink>
           </div>
         </div>
       </form>

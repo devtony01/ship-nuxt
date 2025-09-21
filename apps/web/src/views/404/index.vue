@@ -21,8 +21,12 @@ const router = useRouter()
     >
       <div class="max-w-md w-full space-y-8 text-center">
         <div>
-          <h1 class="text-9xl font-bold text-gray-300">404</h1>
-          <h2 class="mt-6 text-3xl font-extrabold text-gray-900">Page not found</h2>
+          <h1 class="text-9xl font-bold text-gray-300">
+            404
+          </h1>
+          <h2 class="mt-6 text-3xl font-extrabold text-gray-900">
+            Page not found
+          </h2>
           <p class="mt-2 text-sm text-gray-600">
             Sorry, we couldn't find the page you're looking for.
           </p>

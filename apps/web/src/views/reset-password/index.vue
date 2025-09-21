@@ -85,24 +85,32 @@ const onSubmit = handleSubmit((values: ResetPasswordInput, ctx) => {
   <UnauthorizedLayout>
     <div class="w-full max-w-md">
       <div class="text-center mb-6">
-        <h2 class="text-3xl font-extrabold">Reset Password</h2>
+        <h2 class="text-3xl font-extrabold">
+          Reset Password
+        </h2>
       </div>
 
       <div v-if="isSuccess" class="card bg-base-100 shadow-xl">
         <div class="card-body items-center text-center space-y-2">
-          <h3 class="card-title text-success">Password Reset Successfully!</h3>
+          <h3 class="card-title text-success">
+            Password Reset Successfully!
+          </h3>
           <p class="text-base-content/70">
             Your password has been reset. You can now sign in with your new password.
           </p>
           <div class="pt-4">
-            <RouterLink to="/sign-in" class="btn btn-primary"> Sign In </RouterLink>
+            <RouterLink to="/sign-in" class="btn btn-primary">
+              Sign In
+            </RouterLink>
           </div>
         </div>
       </div>
 
       <form v-else class="card bg-base-100 shadow-xl" novalidate @submit.prevent="onSubmit">
         <div class="card-body space-y-4">
-          <p class="text-base-content/70 text-center">Enter your new password below.</p>
+          <p class="text-base-content/70 text-center">
+            Enter your new password below.
+          </p>
 
           <div class="form-control">
             <label class="label" for="password">
@@ -121,7 +129,7 @@ const onSubmit = handleSubmit((values: ResetPasswordInput, ctx) => {
               :aria-invalid="!!errors.password"
               aria-describedby="password-help"
               :disabled="isLoading"
-            />
+            >
             <p v-if="errors.password" id="password-help" class="mt-1 label-text-alt text-error">
               {{ errors.password }}
             </p>
@@ -160,7 +168,9 @@ const onSubmit = handleSubmit((values: ResetPasswordInput, ctx) => {
 
           <div class="text-center">
             <span class="text-sm opacity-70">Remember your password? </span>
-            <RouterLink to="/sign-in" class="link link-primary text-sm"> Sign In </RouterLink>
+            <RouterLink to="/sign-in" class="link link-primary text-sm">
+              Sign In
+            </RouterLink>
           </div>
         </div>
       </form>

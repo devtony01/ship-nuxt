@@ -112,7 +112,9 @@ const onResendEmail = async () => {
         <div class="card-body">
           <div class="flex items-center justify-between mb-6">
             <div class="flex items-center gap-4">
-              <h1 class="card-title text-3xl">Profile</h1>
+              <h1 class="card-title text-3xl">
+                Profile
+              </h1>
               <div class="flex items-center gap-2">
                 <div
                   class="w-2 h-2 rounded-full"
@@ -152,7 +154,9 @@ const onResendEmail = async () => {
               />
             </svg>
             <div>
-              <h3 class="font-bold">Failed to load profile</h3>
+              <h3 class="font-bold">
+                Failed to load profile
+              </h3>
               <div class="text-xs">
                 {{ (error as any)?.data?.message || 'Please try again later.' }}
               </div>
@@ -175,7 +179,7 @@ const onResendEmail = async () => {
                   class="input input-bordered w-full"
                   :class="{ 'input-error': !!errors.firstName }"
                   :disabled="isUpdating"
-                />
+                >
                 <p v-if="errors.firstName" class="label-text-alt text-error mt-1">
                   {{ errors.firstName }}
                 </p>
@@ -195,7 +199,7 @@ const onResendEmail = async () => {
                   class="input input-bordered w-full"
                   :class="{ 'input-error': !!errors.lastName }"
                   :disabled="isUpdating"
-                />
+                >
                 <p v-if="errors.lastName" class="label-text-alt text-error mt-1">
                   {{ errors.lastName }}
                 </p>
@@ -214,7 +218,7 @@ const onResendEmail = async () => {
                 :placeholder="user?.email || 'Email address'"
                 disabled
                 class="input input-bordered w-full input-disabled"
-              />
+              >
               <label class="label">
                 <span class="label-text-alt opacity-70">Email address cannot be changed.</span>
               </label>
@@ -235,8 +239,12 @@ const onResendEmail = async () => {
                 />
               </svg>
               <div>
-                <h3 class="font-bold">Email not verified</h3>
-                <div class="text-xs">Please verify your email address to access all features.</div>
+                <h3 class="font-bold">
+                  Email not verified
+                </h3>
+                <div class="text-xs">
+                  Please verify your email address to access all features.
+                </div>
                 <div class="mt-2">
                   <button
                     type="button"

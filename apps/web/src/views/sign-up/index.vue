@@ -69,12 +69,16 @@ const onSubmit = handleSubmit(async (data: SignUpParams, ctx) => {
   <UnauthorizedLayout>
     <div class="w-full max-w-md">
       <div class="text-center mb-6">
-        <h2 class="text-3xl font-extrabold">Sign Up</h2>
+        <h2 class="text-3xl font-extrabold">
+          Sign Up
+        </h2>
       </div>
 
       <div v-if="isSignUpSuccess" class="card bg-base-100 shadow-xl">
         <div class="card-body items-center text-center space-y-2">
-          <h3 class="card-title">Thanks!</h3>
+          <h3 class="card-title">
+            Thanks!
+          </h3>
           <p class="text-base-content/70">
             Please follow the instructions from the email to complete a sign up process. We sent an
             email with a confirmation link to
@@ -111,7 +115,7 @@ const onSubmit = handleSubmit(async (data: SignUpParams, ctx) => {
               required
               :aria-invalid="!!errors.firstName"
               aria-describedby="firstName-help"
-            />
+            >
             <p v-if="errors.firstName" id="firstName-help" class="mt-1 label-text-alt text-error">
               {{ errors.firstName }}
             </p>
@@ -133,7 +137,7 @@ const onSubmit = handleSubmit(async (data: SignUpParams, ctx) => {
               required
               :aria-invalid="!!errors.lastName"
               aria-describedby="lastName-help"
-            />
+            >
             <p v-if="errors.lastName" id="lastName-help" class="mt-1 label-text-alt text-error">
               {{ errors.lastName }}
             </p>
@@ -155,7 +159,7 @@ const onSubmit = handleSubmit(async (data: SignUpParams, ctx) => {
               required
               :aria-invalid="!!errors.email"
               aria-describedby="email-help"
-            />
+            >
             <p v-if="errors.email" id="email-help" class="mt-1 label-text-alt text-error">
               {{ errors.email }}
             </p>
@@ -177,7 +181,7 @@ const onSubmit = handleSubmit(async (data: SignUpParams, ctx) => {
               required
               :aria-invalid="!!errors.password"
               aria-describedby="password-help"
-            />
+            >
             <p v-if="errors.password" id="password-help" class="mt-1 label-text-alt text-error">
               {{ errors.password }}
             </p>
@@ -221,7 +225,9 @@ const onSubmit = handleSubmit(async (data: SignUpParams, ctx) => {
 
           <div class="text-center">
             <span class="text-sm opacity-70">Have an account? </span>
-            <RouterLink to="/sign-in" class="link link-primary text-sm"> Sign In </RouterLink>
+            <RouterLink to="/sign-in" class="link link-primary text-sm">
+              Sign In
+            </RouterLink>
           </div>
         </div>
       </form>
