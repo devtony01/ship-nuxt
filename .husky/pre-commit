@@ -1,5 +1,4 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-pnpm --filter api lint
-pnpm --filter web lint
+npx turbo run precommit --concurrency=1
