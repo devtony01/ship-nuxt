@@ -32,6 +32,7 @@ jobs:
   build-api:
     name: Build API
     runs-on: ubuntu-latest
+    environment: production
     if: ${{ inputs.force_rebuild && (inputs.service == 'api' || inputs.service == 'both') }}
     
     steps:
@@ -66,6 +67,7 @@ jobs:
   build-web:
     name: Build Web
     runs-on: ubuntu-latest
+    environment: production
     if: ${{ inputs.force_rebuild && (inputs.service == 'web' || inputs.service == 'both') }}
     
     steps:
