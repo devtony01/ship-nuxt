@@ -1,0 +1,8 @@
+@import 'tailwindcss';
+@plugin "daisyui";
+@import 'vue-sonner/style.css';
+
+/* Ensure toast notifications are visible */
+.vue-sonner-toast {
+  z-index: 9999 !important;
+}
