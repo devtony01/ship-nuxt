@@ -25,7 +25,7 @@ on:
 
 env:
   AWS_REGION: us-east-1
-  EKS_CLUSTER_NAME: ship-nuxt-cluster
+  EKS_CLUSTER_NAME: ship-nuxt-v1
 
 jobs:
   # Optional: Build images if force_rebuild is true
@@ -58,8 +58,8 @@ jobs:
         file: ./apps/api/Dockerfile
         push: true
         tags: |
-          ${{ vars.AWS_ACCESS_KEY_ID }}.dkr.ecr.us-east-1.amazonaws.com/ship-vue-api:${{ inputs.image_tag }}
-          ${{ vars.AWS_ACCESS_KEY_ID }}.dkr.ecr.us-east-1.amazonaws.com/ship-vue-api:latest
+          ${{ vars.AWS_ACCESS_KEY_ID }}.dkr.ecr.us-east-1.amazonaws.com/ship-nuxt-api:${{ inputs.image_tag }}
+          ${{ vars.AWS_ACCESS_KEY_ID }}.dkr.ecr.us-east-1.amazonaws.com/ship-nuxt-api:latest
         build-args: |
           APP_ENV=production
 
@@ -92,8 +92,8 @@ jobs:
         file: ./apps/web/Dockerfile
         push: true
         tags: |
-          ${{ vars.AWS_ACCESS_KEY_ID }}.dkr.ecr.us-east-1.amazonaws.com/ship-vue-web:${{ inputs.image_tag }}
-          ${{ vars.AWS_ACCESS_KEY_ID }}.dkr.ecr.us-east-1.amazonaws.com/ship-vue-web:latest
+          ${{ vars.AWS_ACCESS_KEY_ID }}.dkr.ecr.us-east-1.amazonaws.com/ship-nuxt-web:${{ inputs.image_tag }}
+          ${{ vars.AWS_ACCESS_KEY_ID }}.dkr.ecr.us-east-1.amazonaws.com/ship-nuxt-web:latest
         build-args: |
           APP_ENV=production
 
