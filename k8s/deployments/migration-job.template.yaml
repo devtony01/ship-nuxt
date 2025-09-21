@@ -1,0 +1,32 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-migration-${IMAGE_TAG:-latest}
+  namespace: ${NAMESPACE:-production}
+  labels:
+    app: migration
+    version: ${IMAGE_TAG:-latest}
+spec:
+  template:
+    metadata:
+      labels:
+        app: migration
+        version: ${IMAGE_TAG:-latest}
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: migrator
+        image: ${ECR_REGISTRY}/ship-vue-api:${IMAGE_TAG:-latest}
+        command: ["ts-node", "--transpile-only", "apps/api/src/migrator.ts"]
+        envFrom:
+        - secretRef:
+            name: api-secrets
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "200m"
+  backoffLimit: 3
+  ttlSecondsAfterFinished: 300  # Clean up job after 5 minutes
